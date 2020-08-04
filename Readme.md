@@ -24,8 +24,7 @@ Criação do Proffy, uma plataforma para conexão professores e alunos.
 ## 🚀 Tecnologias utilizadas
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
 * React
-* ReactJS
-* React DOM
+* NodeJS
 * HTML 5 e CSS 3
 * TypeScript
 
