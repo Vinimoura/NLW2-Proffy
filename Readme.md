@@ -1,4 +1,16 @@
-<img src="./readme/Home.png" width=600 />
+<h1 align="center">
+  <img src="./readme/logo.png" width="250" /> 
+</h1>
+<h1 align="center">
+  <img src="./readme/Home.png" width=600 />
+</h1>
+
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/dxwebster/NLW2-Proffy">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/dxwebster/NLW2-Proffy">
+</p>
+
+---
 
 ## 💡 Sobre
 Criação do Proffy, uma plataforma para conexão professores e alunos.
