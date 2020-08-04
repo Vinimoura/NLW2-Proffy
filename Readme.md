@@ -3,11 +3,6 @@
 </p>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/dxwebster/NLW2-Proffy">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/dxwebster/NLW2-Proffy">
-</p>
-
-<p align="center">
   <img src="./readme/Home.png"/>
 </p>
 
