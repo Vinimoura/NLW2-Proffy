@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./readme/logo.png"/> 
+  <img src="./readme/logo.png" width=250/> 
 </p>
 
 <p align="center">
@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img src="./readme/Home.png" width=600 />
+  <img src="./readme/Home.png"/>
 </p>
 
 ## 📑 Sumário
