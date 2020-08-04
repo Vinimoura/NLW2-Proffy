@@ -11,15 +11,14 @@
   <img src="./readme/Home.png" width=600 />
 </p>
 
-
-## 💡 Sobre
-Criação do Proffy, uma plataforma para conexão professores e alunos.
-
 ## 📑 Sumário
+- [Sobre o Projeto](#-sobre-o-projeto)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 - [Licença](#-licença)
 
+## 💡 Sobre o Projeto
+Criação do Proffy, uma plataforma para conexão professores e alunos.
 
 ## 🚀 Tecnologias utilizadas
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
@@ -32,13 +31,11 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/)
   
 #### 🖥 Desktop
-
 |<img src="./readme/preview-web.png" width=500 />|<img src="./readme/Formulário.png" width=500 /> |  
 |---|---|
 
 
 ### 📱 Mobile
-
 |<img src="./readme/preview-mobile.png" width=300 />|<img src="./readme/Home-mobile.png" width=300 /> |  
 |---|---|
 
