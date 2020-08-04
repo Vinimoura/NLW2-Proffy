@@ -31,6 +31,17 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 |<img src="./readme/preview-mobile.png" width=300 />|<img src="./readme/Home-mobile.png" width=300 /> |  
 |---|---|
 
+## Funcionalidades do Back-end
+
+### Conexões
+- Rota para listar o total de conexões realizadas
+- Rota para criar uma nova conexão
+
+### Aulas
+- Rota para criar uma aula
+- Rota para listar aulas
+  - Filtrar por matéria, dia da semana e horário
+
 
 ## 📕 Licença
 Todos os arquivos incluídos aqui, incluindo este * README *, estão sob [Licença MIT](./LICENSE).
