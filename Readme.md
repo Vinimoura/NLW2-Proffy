@@ -120,13 +120,11 @@ Para nossa aplicação vammos criar 4 tabelas principais:
 
 ## Criação das Tabelas 
 
-Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados. 
+Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados. Importante criar cada arquivo de tabela numa ordem numérica crescente.
 
 ### Tabela: Create Users
 
-Vamos criar a primeira tabela de cadastro de usuários. Na subpasta 'migrations' criar um arquivo '00_create_users.ts':
-
-Seguindo a lógica das migrations, primeiro temos a função pra criar a tabela (up) e depois a função para deletar a tabela (down). Dentro da função up(), escrevemos cada coluna e sua característica (chave primária, obrigatoriedade, etc):
+Vamos criar a primeira tabela de cadastro de usuários. Na subpasta 'migrations' criar um arquivo '00_create_users.ts'. Seguindo a lógica das migrations, primeiro temos a função pra criar a tabela (up) e depois a função para deletar a tabela (down). Dentro da função up(), escrevemos cada coluna e sua característica (chave primária, obrigatoriedade, etc):
 
 ```ts
 import Knex from 'knex';
@@ -147,6 +145,7 @@ export async function down(knex: Knex) {
 ```
 
 ### Tabela: Create Classes
+Criar um arquivo '01_create_classes.ts':
 
 ```ts
 import Knex from 'knex';
@@ -171,6 +170,7 @@ export async function down(knex: Knex) {
 ```
 
 ### Tabela: Create Class Schedule
+Criar um arquivo '02_create_classes_schedules.ts':
 
 ```ts
 import Knex from 'knex';
@@ -196,6 +196,7 @@ export async function down(knex: Knex) {
 ```
 
 ### Tabela: Create Connections
+Criar um arquivo '03_create_connections.ts':
 
 ```ts
 import Knex from 'knex';
