@@ -13,10 +13,12 @@ Criação do Proffy, uma plataforma para conexão professores e alunos.
 
 ## 🚀 Tecnologias utilizadas
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
-* React
-* NodeJS
-* HTML 5 e CSS 3
-* TypeScript
+
+- ReactJS
+- React Native
+- TypeScript
+- HTML5 e CSS3
+- NodeJS
 
 ## 🎨 Design 
 Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/)
