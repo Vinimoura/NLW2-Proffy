@@ -92,23 +92,133 @@ const db = knex({
 
 export default db;
 ```
-Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados.
+Agora na pasta 'src' vamos criar um arquivo 'knexfile.ts' para configuração do knex com o caminho da nossa pasta migrations:
 
 ```ts
-import knex from 'knex';
 import path from 'path';
 
-const db = knex({
-  client: 'sqlite3',
-  connection: {
-    filename: path.resolve(__dirname, 'database.sqlite')
-  },
-  useNullAsDefault: true,
-});
-
-export default db;
+module.exports = {
+    client: 'sqlite3',
+    connection: {
+        filename: path.resolve(__dirname, 'src', 'database', 'database.sqlite')
+    },
+    migrations: {
+        directory: path.resolve(__dirname, 'src', 'database', 'database.sqlite')
+    },
+    useNullAsDefault: true,
+}
 ```
 
+# ✏ Primeiros códigos
+
+Para nossa aplicação vammos criar 4 tabelas principais:
+
+- Cadastro de usuários
+- Cadastro de matérias
+- Criação de Cronograma
+- Criação de conexões
+
+## Criação das Tabelas 
+
+Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados. 
+
+### Tabela: Create Users
+
+Vamos criar a primeira tabela de cadastro de usuários. Na subpasta 'migrations' criar um arquivo '00_create_users.ts':
+
+Seguindo a lógica das migrations, primeiro temos a função pra criar a tabela (up) e depois a função para deletar a tabela (down). Dentro da função up(), escrevemos cada coluna e sua característica (chave primária, obrigatoriedade, etc):
+
+```ts
+import Knex from 'knex';
+
+export async function up(knex: Knex) {
+  return knex.schema.createTable('users', (table) => {
+    table.increments('id').primary();
+    table.string('name').notNullable();
+    table.string('avatar').notNullable();
+    table.string('whatsapp').notNullable();
+    table.string('bio').notNullable();
+  })
+}
+
+export async function down(knex: Knex) {
+  return knex.schema.dropTable('users');
+}
+```
+
+### Tabela: Create Classes
+
+```ts
+import Knex from 'knex';
+
+export async function up(knex: Knex) {
+  return knex.schema.createTable('classes', (table) => {
+    table.increments('id').primary();
+    table.string('subject').notNullable();
+    table.decimal('cost').notNullable();
+    table.integer('user_id')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+  })
+}
+
+export async function down(knex: Knex) {
+  return knex.schema.dropTable('classes');
+}
+```
+
+### Tabela: Create Class Schedule
+
+```ts
+import Knex from 'knex';
+
+export async function up(knex: Knex) {
+  return knex.schema.createTable('class_schedule', (table) => {
+    table.increments('id').primary();
+    table.integer('week_day').notNullable();
+    table.integer('from').notNullable();
+    table.integer('to').notNullable();
+    table.integer('class_id')
+      .notNullable()
+      .references('id')
+      .inTable('classes')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+  })
+}
+
+export async function down(knex: Knex) {
+  return knex.schema.dropTable('class_schedule');
+}
+```
+
+### Tabela: Create Connections
+
+```ts
+import Knex from 'knex';
+
+export async function up(knex: Knex) {
+  return knex.schema.createTable('connections', (table) => {
+    table.increments('id').primary();
+    table.integer('user_id')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+    table.timestamp('created_at')
+      .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+      .notNullable();
+  })
+}
+
+export async function down(knex: Knex) {
+  return knex.schema.dropTable('connections');
+}
+```
 
 
 ## 📕 Licença
