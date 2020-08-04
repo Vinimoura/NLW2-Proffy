@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./readme/logo.png" width="250" /> 
+  <img src="./readme/logo.png"/> 
 </p>
 
 <p align="center">
