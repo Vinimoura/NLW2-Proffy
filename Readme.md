@@ -269,10 +269,10 @@ interface scheduleItem {
   to: string
 }
 ```
-Agora vamos criar uma class chamada ClassesController{}, e escrever dentro dessas chaves duas querys: A primeira será a função index() que lista as aulas. Essa listagem terá 3 filtros: dia da semana, matéria e horário.
+Agora vamos criar uma class chamada ClassesController{}, e escrever dentro dessas chaves duas querys. 
 
-
-### Query para listar as aulas 
+### Controller de Aulas
+A primeira query será a função index() que lista as aulas. Essa listagem terá 3 filtros: dia da semana, matéria e horário.
 Primeiro pegamos os filtros pelo request.query e setamos as tipagens deles.
 
 ```ts
@@ -321,7 +321,6 @@ Agora vamos para a query de busca na tabela 'classes'. Com umas funções do kne
   } 
 ```
 
-### Query para criar as aulas 
 Logo abaixo a criação da listagem das aulas, continuamos escrevendo, agora a função create() que cria a aula. Ela vai pegar todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
 
 ```ts
@@ -421,12 +420,41 @@ Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.
 ```
 
 
-🚧 Continuar aqui...🚧
+### Controller de Conexões
+Vamos criar o arquivo 'ConnectionsController.ts'. Nas primeiras linhas vamos importar o express e o banco de dados. Depois vamos escrever duas funções, uma pra listar e outra para criar.
+
+```ts
+import { Request, Response } from 'express';
+import db from '../database/connection';
+
+export default class ConnectionsController {
+
+// -------- Função que lista o total de conexões feitas --------
+  async index(request: Request, response: Response) {
+    const totalConnections = await db('connections').count('* as total');
+
+    const { total } = totalConnections[0];
+
+    return response.json({ total });
+  }
+
+// -------- Função que cria uma conexão --------
+  async create(request: Request, response: Response) {
+    const { user_id } = request.body;
+
+    await db('connections').insert({
+      user_id,
+    });
+
+    return response.status(201).send('Sucesso');
+  }
+}
+```
+
 
 
 ## Rotas
-
-Na pasta 'src' vamos criar um arquivo 'routes.ts' que conterá a chamada das nossas rotas. Nas primeiras linhas, vamos fazer a importação do 'express' e também de duas classes que criaremos emm seguida, que conterá os métodos que lidam com nosso banco de dados.
+Na pasta 'src' vamos criar um arquivo 'routes.ts' que conterá a chamada das nossas rotas. Nas primeiras linhas, vamos fazer a importação do 'express' e também das duas classes que criamos, com nossos querys.
 
 ```ts
 import express from 'express';
