@@ -301,10 +301,10 @@ export default class ConnectionsController {
       .whereExists(function Exists() {
         this.select('class_schedule.*') // seleciona todos os campos da tabela 'class_schedule'
           .from('class_schedule')
-          .whereRaw('`class_schedule`.`class_id` = `classes`.`id`') // pesquisa todos os agendamentos que tem o class_id igual ao buscado
-          .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)]) // pesquisa todos os agendamentos que o dia da semana for igual ao buscado
-          .whereRaw('`class_schedule`.`from` <= ??', [timeInMinutes]) // pesquisa todos os agendamentos que tem horário menor ou igual ao buscado
-          .whereRaw('`class_schedule`.`to` > ??', [timeInMinutes]); // pesquisa todos os agendamentos que que tem horário maior que o buscado
+          .whereRaw('`class_schedule`.`class_id` = `classes`.`id`') // busca todas as aulas que tem o class_id igual ao filtrado
+          .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)]) // busca todas as aulas que o dia da semana for igual ao filtrado
+          .whereRaw('`class_schedule`.`from` <= ??', [timeInMinutes]) // busca todas as aulas que tem horário menor ou igual ao filtrado
+          .whereRaw('`class_schedule`.`to` > ??', [timeInMinutes]); // busca todas as aulas que que tem horário maior que ao filtrado
       })
       .where('classes.subject', '=', subject)
       .join('users', 'classes.user_id', '=', 'users.id')
