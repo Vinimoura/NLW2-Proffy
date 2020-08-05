@@ -112,14 +112,13 @@ module.exports = {
 Vamos usar a extensão 'SQLite' do VScode. Clicar com o botão direito  em cima do arquivo 'database.sqlite' e selecionar 'Open Database'. Vai abrir uma aba SQLITE EXPLORER para visualizarmos as tabelas que vamos criar para a aplicação.
 
 
-# ✏ Primeiros códigos
+# ✏ Vamos codar!
+Com as configurações principais feitas, vamos começar nossa aplicação pela criação das tabelas do banco de dados. Vamos criar 4 tabelas:
 
-Para nossa aplicação vammos criar 4 tabelas principais:
-
-- Cadastro de usuários (id, name, avatar, whatsapp, bio)
-- Cadastro de aulas (id, subject, cost, user_id)
-- Cadastro da agenda (week_day, from, to, class_id)
-- Criação de conexões (id, user_id, created_at)
+- Tabela de usuários (id, name, avatar, whatsapp, bio)
+- Tabela de aulas (id, subject, cost, user_id)
+- Tabela da agenda (week_day, from, to, class_id)
+- Tabela de conexões (id, user_id, created_at)
 
 ## Criação das Tabelas 
 
@@ -234,6 +233,13 @@ export async function down(knex: Knex) {
   return knex.schema.dropTable('connections');
 }
 ```
+
+## Criando as rotas
+
+
+
+
+
 
 
 ## 📕 Licença
