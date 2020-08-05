@@ -48,10 +48,284 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 |---|---|
 
 
-# 📚 Instalação e Configuração das bibliotecas
-O Node e o Yarn já devem estar instalados. 
+# Front-end
 
+Criar uma pasta 'web' que vai conter nossa aplicação. 
+
+**Instalar o Template de aplicação de react em Typescript**: `yarn create react-app web --template typescript`
+
+Agora, dentro da pasta 'src' vamos criar uma pasta 'assets' e uma subpasta 'images'. Nela deixaremos as imagens da nossa página.
+
+## Limpar estrutura do Template
+Vamos fazer algumas alterações em arquivos do template que não vamos utilizar, ou que vamos recriar depois. 
+- Excluir Todos os arquivos .css
+- Na pasta 'public' deixar apenas o index.html
+- Excluir o Readme.md
+- Excluir o App.test.tsx
+- Excluir o logo.svg
+- Excluir o serviceWorker.ts
+- Excluir o setupTests.ts
+- Abrir os arquivos 'index.tsx', App.tsx' e 'index.html' e remover as linhas que chamavam os arquivos que excluímos
+
+
+## Estilos Globais
+A construção do layout da nossa aplicação seguirá o conceito de Mobile First, ou seja, primeiro estilizaremos o layout para dispositivos mobile e depois trabalharemos nas media-querys para ajusta-los as outras telas maiores.
+
+Dentro da pasta 'assets' vamos criar uma subpasta 'styles' e dentro dela um arquivo 'global.css'. Nesse arquivo teremos estilizações globais que funcionaram para todo o projeto.
+Vamos usar unidades de medidas do css que são adaptáveis a diferentes telas, para termos um layout responsivo (ex: rem, vh e vw).
+
+```css
+:root {
+    --color-background: #F0F0F7;
+    --color-primary-lighter: #9871F5;
+    --color-primary-light: #916BEA;
+    --color-primary: #8257E5;
+    --color-primary-dark: #774DD6;
+    --color-primary-darker: #6842C2;
+    --color-secundary: #04D361;
+    --color-secundary-dark: #04BF58;
+    --color-title-in-primary: #FFFFFF;
+    --color-text-in-primary: #D4C2FF;
+    --color-text-title: #32264D;
+    --color-text-complement: #9C98A6;
+    --color-text-base: #6A6180;
+    --color-line-in-white: #E6E6F0;
+    --color-input-background: #F8F8FC;
+    --color-button-text: #FFFFFF;
+    --color-box-base: #FFFFFF;
+    --color-box-footer: #FAFAFC;
+  
+    font-size: 60%;
+  }
+
+  *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; // width e height incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin.
+  }
+
+  html, body, #root{
+      height: 100vh; // nossa página ocupa a altura total da tela
+  }
+
+  body{
+      background: var(--color-background);
+  }
+
+  #root{
+      display: flex; // Transforma em flex container e todos os seus filhos diretos em flex itens.
+      align-items: center; // todo conteúdo fica alinhado horizontalmente 
+      justify-content: center; // todo conteúdo fica justificado ao centro da tela
+  }
+
+  body, input, button, textarea{
+      font: 500 1.6rem Poppins; // precisa forçar a fonte nos campos de formulário
+      // 1.6rem significa que aumenta em 60% o tamanho da fonte principal
+  }
+
+  .container{
+      width: 90vw; // ocupa 90% da tela horizontalmente
+      max-width: 700px; // a menos que o 90% passe 700px
+  }
+
+  @media (min-width: 700px) {
+    :root {
+        font-size: 62.5%;
+    }
+}
+```
+
+# Component: Landing Page
+Na pasta 'scr' criar uma pasta 'pages' e uma subpasta 'Landing' com um arquivo 'index.tsx', para criar nosso primeiro componente "Landing" que conterá o conteúdo principal da nossa Homepage. O componente do React é uma função (com letra maiúscula) que retorna um html. Vamos começar importando o React e depois o component 'Link' padrão do React.
+
+```tsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+// Para inserir imagens no JSX precisamos importar cada imagem em variáveis 
+import logoImg from '../../assets/images/logo.svg';
+import landingImg from '../../assets/images/landing.svg';
+import studyIcon from '../../assets/images/icons/study.svg';
+import giveClassesIcon from '../../assets/images/icons/give-classes.svg';
+import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
+
+// aqui importamos o estilo específico dessa página
+import './styles.css';
+
+
+function Landing() {
+    return (
+        <div id="page-landing">
+            <div id="page-landing-content" className="container">
+                
+                <div className="logo-container">
+                    <img src={logoImg} alt="Proffy" />
+                    <h2>Sua plataforma de estudos online.</h2>
+                </div>
+
+                <img src={landingImg} alt="Plataforma de estudos" className="hero-image" />
+
+                <div className="buttons-container">
+                    <Link to="/study" className="study">
+                        <img src={studyIcon} alt="Study"/>
+                        Estudar
+                    </Link>
+                
+                    <Link to="/give-classes" className="give-classes">
+                        <img src={giveClassesIcon} alt="Give classes"/>
+                        Dar Aulas
+                    </Link>
+                </div>
+
+                <span className="total-connections">
+                    Mais de 200 conexões
+                    <img src={purpleHeartIcon} alt="Purple Heart"/>
+                </span>
+
+            </div>
+        </div>
+    )
+}
+
+export default Landing;
+```
+
+Agora vamos criar um estilo específico dessa página em um arquivo 'styles.css' dentro do mesmo diretório do 'index.ts'. Para acessar o estilo completo, clicar [aqui]().
+Abaixo, vamos comentar alguns pontos importantes desse estilo:
+
+Ao colocar a imagem principal em 100%, fazemos com que ela não sobressaia o tamanho total da tela:
+
+```css
+.hero-image {
+    width: 100%;
+}
+```
+
+Temos um container para os botões que também setaremos como flex:
+
+```css
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 3.2rem 0;
+}
+```
+
+Da mesma forma, faremos com os botões que também serão um container para os ícones e os textos.
+
+```css
+.buttons-container a {
+    width: 30rem;
+    height: 10.4rem;
+    border-radius: 0.8rem;
+    margin-right: 1.6rem;
+    font: 700 2.0rem Archivo;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    color: var(--color-button-text);
+
+    transition: background-color 0.2s;
+}
+```
+
+Vamos agora fazer um break-point de 1100px que é onde mais ou menos a tela vai se converter em tamanho de desktop. Agora vamos usar o estilo display: grid, onde podemos simplesmente indicar aonde cada elemento se posicionará, seguindo a estrutura de linhas e colunas.
+
+- Com o 'grid-template-rows', setamos 2 linhas: A primeira linha vai ocupar a altura de 350px e a segunda vai ocupar o espaço que sobrar
+- Com o 'grid-template-columns',  setamos 3 colunas, onde a primeira ocupa 2 espaços e as outras duas ocupam 1 espaço cada.
+- Com o 'grid-template-areas', eu crio 'variáveis' que vão indicar cada elemento
+
+```css
+@media (min-width: 1100px) {
+    #page-landing-content {
+        max-width: 1100px;
+        display: grid;
+        grid-template-rows: 350px 1fr; 
+        grid-template-columns: 2fr 1fr 1fr; 
+        grid-template-areas: 
+        "logo hero hero"
+        "buttons buttons total"
+        ;
+    }
+```
+Agora para cada estilo de elemento, eu informo a qual variável ele corresponde, com o estilo 'grid-area'. Ou seja, vou definir os estilos do logo, hero, buttons e total.
+
+```css
+    .logo-container {
+        grid-area: logo;
+        align-self: center; // ficar alinhado ao centro 
+        text-align: left; // alinhar para a esquerda
+        margin: 0;
+    }
+
+    .logo-container h2 {
+        text-align: initial; // ficar alinhado ao início 
+        font-size: 3.6rem;
+    }
+
+    .logo-container img {
+        height: 100%;
+    }
+
+    .hero-image {
+        grid-area: hero;
+        justify-self: end; // ficar alinhado para a direita 
+    }
+
+    .buttons-container {
+        grid-area: buttons;
+        justify-content: flex-start; // ficar alinhado a esquerda
+    }
+
+    .buttons-container a {
+        font-size: 2.4rem;
+    }
+    
+    .total-connections {
+        grid-area: total;
+        justify-self: end;
+    }
+  }
+    
+```
+
+
+
+
+
+
+
+
+
+# Component: App
+Teremos um componente principal que colocaremos no nosso 'index.tsx' que conterá todos os outros componentes da aplicação. Nas primeiras linhas vamos fazer a importação do React, do arquivo de rotas e do nosso estilo global. Vamos criar o componente App como uma função que retorna as rotas.
+
+```tsx
+import React from 'react';
+import Routes from './routes';
+import './assets/styles/global.css';
+
+
+function App() {
+  return (
+    <Routes/>
+  );
+}
+
+export default App;
+```
+
+
+
+# Back-end
+O Node e o Yarn já devem estar instalados. 
 Criar uma pasta 'server' que vai conter nossa aplicação.
+
+
+## 📚 Instalação e Configuração das bibliotecas
 
 **Iniciar o node na pasta** _(cria o arquivo 'package.json')_: `yarn init -y`
 
