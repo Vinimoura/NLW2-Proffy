@@ -235,19 +235,31 @@ export async function down(knex: Knex) {
 ```
 
 ## Função para lidar com os Horários
-O banco SQL não consegue armazenar informações com  o formato de horas (ex: 8:00). Para resolver isso, vamos criar uma pasta 'utils' e um arquivo chamado 'convertHoursToMinutes.ts'. Nesse arquivo criaremos uma função que converte horas em minutos, assim conseguimos armazenar essa informação no banco de dados. Atráves da função de js 'split()' vamos dividir a hora onde tem os dois pontos (8:00) e retornar ela num array. Com o map vou passar por todos os itens e armazenar cada posição em uma variável, fazendo uma desestruturação de hour (para a primeira posição) e minutes (para segunda posição). Logo em seguida faço a conversão e armazeno o resultado na variável 'timeInMinutes'. Vamos utilizar essa função mais pra frente, quando  formos de fato fazer as querys para inserção das informações no banco de dados.
+O banco SQL não consegue armazenar informações com  o formato de horas (ex: 8:00). Para resolver isso, vamos criar uma pasta 'utils' e um arquivo chamado 'convertHoursToMinutes.ts'. Nesse arquivo criaremos uma função que converte horas em minutos, assim conseguimos armazenar essa informação no banco de dados. Vamos utilizar essa função mais pra frente, quando  formos de fato fazer as querys para inserção das informações no banco de dados.
+
+Atráves da função de js 'split()' vamos dividir a hora onde tem os dois pontos (8:00) e retornar ela num array. Com o map vou passar por todos os itens e armazenar cada posição em uma variável, fazendo uma desestruturação de hour (para a primeira posição) e minutes (para segunda posição). 
 
 ```ts
 export default function convertHourToMinutes(time: string) {
   const [hour, minutes] = time.split(':').map(Number);
+```
+Logo abaixo faço a conversão e armazeno o resultado na variável 'timeInMinutes'. 
 
-  // faço a conversão de  hora em minutos
+```ts
   const timeInMinutes = (hour * 60) + minutes;
-
-  // retorno
   return timeInMinutes;
 }
 ```
+A função completa ficará assim:
+
+```ts
+export default function convertHourToMinutes(time: string) {
+  const [hour, minutes] = time.split(':').map(Number);
+  const timeInMinutes = (hour * 60) + minutes;
+  return timeInMinutes;
+}
+```
+
 
 ## Criando as rotas
 Nossa aplicação gira em torno de duas entidades: classes e connections. Para cada entidade, vamos fazer rotas para buscar (get) ou criar (post) alguma informação no banco de dados. Na pasta 'src' vamos criar uma pasta 'controllers' que conterá um arquivo para cada entidade.
