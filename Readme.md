@@ -254,27 +254,25 @@ Logo abaixo faço a conversão e armazeno o resultado na variável 'timeInMinute
 ## Controllers
 Nossa aplicação gira em torno de duas entidades: classes e connections. Para cada entidade, vamos fazer rotas para buscar (get) ou criar (post) alguma informação no banco de dados. Na pasta 'src' vamos criar uma pasta 'controllers' que conterá um arquivo para cada entidade.
 
+
+### Controller de Aulas
 Vamos criar o arquivo 'ClassesController.ts'. Nas primeiras linhas vamos importar o express, o banco de dados e nossa função criada 'convertHourToMinutes()'.
 
 ```ts
 import { Request, Response } from 'express';
 import db from '../database/connection';
 import convertHourToMinutes from '../utils/convertHourToMinutes';
-```
-Como estamos usando o Typescript, precisamos informar o formato de cada item que compõe o agendamento de uma aula, por meio de uma interface:
-```ts
+
+// Interface que define o formato do ScheduleItem
 interface scheduleItem {
   week_day: number,
   from: string,
   to: string
 }
-```
-Agora vamos criar uma class chamada ClassesController{}, e escrever dentro dessas chaves duas querys. 
 
-### Controller de Aulas
-A primeira query será a função index() que lista as aulas. Essa listagem terá 3 filtros: dia da semana, matéria e horário.
+// Cria a class ConnectionsController para englobar as querys
+export default class ConnectionsController {
 
-```ts
 // -------- Função que que lista as aulas filtradas --------
   async index(request: Request, response: Response){
     const filters = request.query;
@@ -283,24 +281,22 @@ A primeira query será a função index() que lista as aulas. Essa listagem ter�
     const week_day = filters.week_day as string;
     const time = filters.time as string;
 
+
 // Nossa listagem só poderá ser feita caso tenha pelo menos um dos filtros.
 // Para isso vamos fazer um if para caso não existir esses filtros, retornamos um erro.
-
     if(!filters.week_day || !filters.subject || !filters.time) {
       return response.status(400).json({
         error: 'Missing filters to search classes',
       })
     }
 
-// Agora vamos converter o horário enviado em minutos usando nossa função convertHourToMinutes() armazenar num variável.
 
-    // usa a função criada 
+// Agora vamos converter o horário enviado em minutos usando nossa função convertHourToMinutes() armazenar num variável.
     const timeInMinutes = convertHourToMinutes(time); 
 
 
 // Agora vamos para a query de busca na tabela 'classes'.
 // Com umas funções do knex conseguimos fazer algumas comparações para buscar aquilo que foi filtrado.
-
     const classes = await db('classes')
       .whereExists(function Exists() {
         this.select('class_schedule.*') // seleciona todos os campos da tabela 'class_schedule'
@@ -317,9 +313,9 @@ A primeira query será a função index() que lista as aulas. Essa listagem ter�
     return response.json(classes);
   } 
 
+
 // -------- Função que que cria uma aula --------
 // Pega todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
-
   async create(request: Request, response: Response) {
     const { 
       name,
@@ -334,15 +330,14 @@ A primeira query será a função index() que lista as aulas. Essa listagem ter�
  
 // Precisamos agora usar uma função chamada 'transaction()' que prepara as inserções no banco.
 // A inserção só é feita caso não dê erro em nenhuma delas.
-    
     const trx = await db.transaction();
+ 
  
 // Agora vamos usar o 'try' para fazer a tentativa de inserção no banco de dados.
 // Dentro dele colocamos nossas querys, que vai pegar determinados dados e inserir em suas respectivas tabelas.
-
     try {
       
-// Prepara a query de inserção na tabela 'users'
+      // Prepara a query de inserção na tabela 'users'
       const insertedUsersIds = await trx('users').insert({
         name,
         avatar,
@@ -352,7 +347,7 @@ A primeira query será a função index() que lista as aulas. Essa listagem ter�
     
       const user_id = insertedUsersIds[0];
      
-// Prepara a query de inserção na tabela 'classes'
+      // Prepara a query de inserção na tabela 'classes'
       const insertedClassesIds = await trx('classes').insert({
         subject,
         cost,
@@ -360,11 +355,11 @@ A primeira query será a função index() que lista as aulas. Essa listagem ter�
       });
     
       const class_id = insertedClassesIds;
-       
+
+
 // A preparação da inserção do schedule vai ser um pouco diferente.
 // Como o schedule é um array de vários dados, antes de inserir precisamos fazer algumas configurações.
-// Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.
-      
+// Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.  
       const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
         return {
           class_id,
@@ -374,23 +369,23 @@ A primeira query será a função index() que lista as aulas. Essa listagem ter�
         };
       });
  
+ 
 // Agora sim podemos inserir o objeto 'classSchedule' na tabela 'class_schedule' 
-
 await trx('class_schedule').insert(classSchedule)
+
 
 // Como estamos usando o transaction, todas as querys estão apenas esperando o commit para realmente rodarem.
 // Com todas as inserções preparadas, podemos fazer o commit() que faz as inserções nas tabelas.
-
 await trx.commit();
 
-// Se der certo as inserções, aparece a mensagem de confirmação
-        
+
+// Se der certo as inserções, aparece a mensagem de confirmação   
 return response.status(201).json({
   success: 'User create with success',
 });
 
-// Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
 
+// Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
    } catch(e) {
   
       // desfaz qualquer alteração no banco
