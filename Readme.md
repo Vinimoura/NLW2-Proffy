@@ -370,22 +370,22 @@ export default class ConnectionsController {
       });
  
  
-// Agora sim podemos inserir o objeto 'classSchedule' na tabela 'class_schedule' 
-await trx('class_schedule').insert(classSchedule)
+      // Agora sim podemos inserir o objeto 'classSchedule' na tabela 'class_schedule' 
+      await trx('class_schedule').insert(classSchedule)
 
 
-// Como estamos usando o transaction, todas as querys estão apenas esperando o commit para realmente rodarem.
-// Com todas as inserções preparadas, podemos fazer o commit() que faz as inserções nas tabelas.
-await trx.commit();
+      // Como estamos usando o transaction, todas as querys estão apenas esperando o commit para realmente rodarem.
+      // Com todas as inserções preparadas, podemos fazer o commit() que faz as inserções nas tabelas.
+      await trx.commit();
 
 
-// Se der certo as inserções, aparece a mensagem de confirmação   
-return response.status(201).json({
-  success: 'User create with success',
-});
+      // Se der certo as inserções, aparece a mensagem de confirmação   
+      return response.status(201).json({
+        success: 'User create with success',
+      });
 
 
-// Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
+    // Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
    } catch(e) {
   
       // desfaz qualquer alteração no banco
