@@ -240,13 +240,13 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
 ```css
     .logo-container {
         grid-area: logo;
-        align-self: center; <!-- alinhar ao centro -->
-        text-align: left; <!-- alinhar para a esquerda -->
+        align-self: center;
+        text-align: left; 
         margin: 0;
     }
 
     .logo-container h2 {
-        text-align: initial; <!-- alinhar ao início -->
+        text-align: initial; 
         font-size: 3.6rem;
     }
 
@@ -256,12 +256,12 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
 
     .hero-image {
         grid-area: hero;
-        justify-self: end; <!-- alinhar para a direita -->
+        justify-self: end; 
     }
 
     .buttons-container {
         grid-area: buttons;
-        justify-content: flex-start; <!-- alinhar a esquerda -->
+        justify-content: flex-start; 
     }
 
     .buttons-container a {
