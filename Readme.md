@@ -50,7 +50,7 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 
 # Front-end
 
-Criar uma pasta 'web' que vai conter nossa aplicação. 
+Vamos criar uma pasta 'web' que vai conter nossa aplicação. 
 
 **Instalar o Template de aplicação de react em Typescript**: `yarn create react-app web --template typescript`
 
@@ -240,13 +240,13 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
 ```css
     .logo-container {
         grid-area: logo;
-        align-self: center; // ficar alinhado ao centro 
-        text-align: left; // alinhar para a esquerda
+        align-self: center; <!-- alinhar ao centro -->
+        text-align: left; <!-- alinhar para a esquerda -->
         margin: 0;
     }
 
     .logo-container h2 {
-        text-align: initial; // ficar alinhado ao início 
+        text-align: initial; <!-- alinhar ao início -->
         font-size: 3.6rem;
     }
 
@@ -256,12 +256,12 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
 
     .hero-image {
         grid-area: hero;
-        justify-self: end; // ficar alinhado para a direita 
+        justify-self: end; <!-- alinhar para a direita -->
     }
 
     .buttons-container {
         grid-area: buttons;
-        justify-content: flex-start; // ficar alinhado a esquerda
+        justify-content: flex-start; <!-- alinhar a esquerda -->
     }
 
     .buttons-container a {
