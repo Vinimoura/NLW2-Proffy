@@ -237,15 +237,11 @@ export async function down(knex: Knex) {
 ## Função para lidar com os Horários
 O banco SQL não consegue armazenar informações com  o formato de horas (ex: 8:00). Para resolver isso, vamos criar uma pasta 'utils' e um arquivo chamado 'convertHoursToMinutes.ts'. Nesse arquivo criaremos uma função que converte horas em minutos, assim conseguimos armazenar essa informação no banco de dados. Vamos utilizar essa função mais pra frente, quando  formos de fato fazer as querys para inserção das informações no banco de dados.
 
-Atráves da função de js 'split()' vamos dividir a hora onde tem os dois pontos (8:00) e retornar ela num array. Com o map vou passar por todos os itens e armazenar cada posição em uma variável, fazendo uma desestruturação de hour (para a primeira posição) e minutes (para segunda posição). 
+Atráves da função de js 'split()' vamos dividir a hora onde tem os dois pontos (8:00) e retornar ela num array. Com o map vou passar por todos os itens e armazenar cada posição em uma variável, fazendo uma desestruturação de hour (para a primeira posição) e minutes (para segunda posição). Logo abaixo faço a conversão e armazeno o resultado na variável 'timeInMinutes'.
 
 ```ts
 export default function convertHourToMinutes(time: string) {
   const [hour, minutes] = time.split(':').map(Number);
-```
-Logo abaixo faço a conversão e armazeno o resultado na variável 'timeInMinutes'. 
-
-```ts
   const timeInMinutes = (hour * 60) + minutes;
   return timeInMinutes;
 }
@@ -301,10 +297,10 @@ export default class ConnectionsController {
       .whereExists(function Exists() {
         this.select('class_schedule.*') // seleciona todos os campos da tabela 'class_schedule'
           .from('class_schedule')
-          .whereRaw('`class_schedule`.`class_id` = `classes`.`id`') // busca * as aulas com o class_id igual ao filtrado
-          .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)]) // busca * as aulas com dia da semana for igual ao filtrado
-          .whereRaw('`class_schedule`.`from` <= ??', [timeInMinutes]) // busca * as aulas com horário menor/igual ao filtrado
-          .whereRaw('`class_schedule`.`to` > ??', [timeInMinutes]); // busca * as aulas com tem horário maior que ao filtrado
+          .whereRaw('`class_schedule`.`class_id` = `classes`.`id`')
+          .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)])
+          .whereRaw('`class_schedule`.`from` <= ??', [timeInMinutes])
+          .whereRaw('`class_schedule`.`to` > ??', [timeInMinutes]);
       })
       .where('classes.subject', '=', subject)
       .join('users', 'classes.user_id', '=', 'users.id')
@@ -431,8 +427,6 @@ export default class ConnectionsController {
   }
 }
 ```
-
-
 
 ## Rotas
 Na pasta 'src' vamos criar um arquivo 'routes.ts' que conterá a chamada das nossas rotas. Nas primeiras linhas, vamos fazer a importação do 'express' e também das duas classes que criamos, com nossos querys.
