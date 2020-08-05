@@ -282,28 +282,23 @@ Primeiro pegamos os filtros pelo request.query e setamos as tipagens deles.
     const subject = filters.subject as string;
     const week_day = filters.week_day as string;
     const time = filters.time as string;
-```
 
-Nossa listagem só poderá ser feita caso tenha pelo menos um dos filtros. Para isso vamos fazer um if para caso não existir esses filtros, retornamos um erro.
+// Nossa listagem só poderá ser feita caso tenha pelo menos um dos filtros. Para isso vamos fazer um if para caso não existir esses filtros, retornamos um erro.
 
-```ts
     if(!filters.week_day || !filters.subject || !filters.time) {
       return response.status(400).json({
         error: 'Missing filters to search classes',
       })
     }
-```
 
-Agora vamos converter o horário enviado em minutos usando nossa função convertHourToMinutes() armazenar num variável.
+// Agora vamos converter o horário enviado em minutos usando nossa função convertHourToMinutes() armazenar num variável.
 
-```ts
     // usa a função criada 
     const timeInMinutes = convertHourToMinutes(time); 
-```
 
-Agora vamos para a query de busca na tabela 'classes'. Com umas funções do knex conseguimos fazer algumas comparações para buscar aquilo que foi filtrado.
 
-```ts
+// Agora vamos para a query de busca na tabela 'classes'. Com umas funções do knex conseguimos fazer algumas comparações para buscar aquilo que foi filtrado.
+
     const classes = await db('classes')
       .whereExists(function Exists() {
         this.select('class_schedule.*') // seleciona todos os campos da tabela 'class_schedule'
@@ -319,11 +314,10 @@ Agora vamos para a query de busca na tabela 'classes'. Com umas funções do kne
 
     return response.json(classes);
   } 
-```
 
-Logo abaixo a criação da listagem das aulas, continuamos escrevendo, agora a função create() que cria a aula. Ela vai pegar todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
 
-```ts
+// Logo abaixo a criação da listagem das aulas, continuamos escrevendo, agora a função create() que cria a aula. Ela vai pegar todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
+
   async create(request: Request, response: Response) {
     const { 
       name,
@@ -334,17 +328,15 @@ Logo abaixo a criação da listagem das aulas, continuamos escrevendo, agora a f
       cost,
       schedule,
     } = request.body;
- ```  
+
  
-Precisamos agora usar uma função chamada 'transaction()' que prepara as inserções no banco, e só faz a inserção caso não dê erro em nenhuma delas.
+// Precisamos agora usar uma função chamada 'transaction()' que prepara as inserções no banco, e só faz a inserção caso não dê erro em nenhuma delas.
 caso dê erro em alguma delas, nenhuma inserção é feita.
     
- ```ts   
     const trx = await db.transaction();
- ``` 
- Agora vamos usar o 'try' para fazer a tentativa de inserção no banco de dados. Dentro dele colocamos nossas querys, que vai pegar determinados dados e inserir em suas respectivas tabelas.
-  
- ```ts    
+ 
+// Agora vamos usar o 'try' para fazer a tentativa de inserção no banco de dados. Dentro dele colocamos nossas querys, que vai pegar determinados dados e inserir em suas respectivas tabelas.
+
     try {
       
 // prepara a query de inserção na tabela 'users'
@@ -356,8 +348,7 @@ caso dê erro em alguma delas, nenhuma inserção é feita.
       });
     
       const user_id = insertedUsersIds[0];
-    
-      
+     
 // prepara a query de inserção na tabela 'classes'
       const insertedClassesIds = await trx('classes').insert({
         subject,
@@ -366,44 +357,35 @@ caso dê erro em alguma delas, nenhuma inserção é feita.
       });
     
       const class_id = insertedClassesIds;
-```      
+       
+// A preparação da inserção do schedule vai ser um pouco diferente. Como o schedule é um array de vários dados, antes de inserir precisamos fazer algumas configurações. Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.
       
-A preparação da inserção do schedule vai ser um pouco diferente. Como o schedule é um array de vários dados, antes de inserir precisamos fazer algumas configurações. Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.
-      
-   
-```ts    
-const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
-  return {
-    class_id,
-    week_day: scheduleItem.week_day,
-    from: convertHourToMinutes(scheduleItem.from), // utilizando a função criada
-    to: convertHourToMinutes(scheduleItem.to), // utilizando a função criada
-  };
-});
- ```   
-Agora sim podemos inserir o objeto 'classSchedule' na tabela 'class_schedule' 
+      const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
+        return {
+          class_id,
+          week_day: scheduleItem.week_day,
+          from: convertHourToMinutes(scheduleItem.from), // utilizando a função criada
+          to: convertHourToMinutes(scheduleItem.to), // utilizando a função criada
+        };
+      });
  
- ```ts
-await trx('class_schedule').insert(classSchedule)
- ```    
-   
-Como estamos usando o transaction, todas as querys estão apenas esperando o commit para realmente rodarem. Com todas as inserções preparadas, podemos fazer o commit() que faz as inserções nas tabelas.
+// Agora sim podemos inserir o objeto 'classSchedule' na tabela 'class_schedule' 
 
-```ts
+await trx('class_schedule').insert(classSchedule)
+
+// Como estamos usando o transaction, todas as querys estão apenas esperando o commit para realmente rodarem. Com todas as inserções preparadas, podemos fazer o commit() que faz as inserções nas tabelas.
+
 await trx.commit();
- ``` 
- 
-Se der certo as inserções, aparece a mensagem de confirmação
-      
- ```ts     
+
+// Se der certo as inserções, aparece a mensagem de confirmação
+        
 return response.status(201).json({
   success: 'User create with success',
 });
- ``` 
 
-Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
-    
-```ts    
+
+// Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
+
    } catch(e) {
   
       // desfaz qualquer alteração no banco
