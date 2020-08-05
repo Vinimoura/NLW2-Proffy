@@ -6,6 +6,22 @@
 - [Sobre o Projeto](#-sobre-o-projeto)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
+
+- [Front-end](#front-end)
+- [Instalação e Configuração das Bibliotecas Front-End](#-instalação-e-configuração-das-bibliotecas-front-end)
+- [Limpar estrutura do Template](#limpar-estrutura-do-template)
+- [Estilos Globais](#estilos-globais)
+- [Components](#components)
+  - [Component: Page Header](#component-page-header)
+  - [Component: Teacher Item](#component-teacher-item)
+- [Páginas](#páginas)
+  - [Página: Landing Page](#página-landing-page)
+  - [Página: Teacher List](#página-teacher-list)
+  - [Página: Teacher Form](#página-teacher-form)
+- [React Router DOM](#react-router-dom)
+- [Component: App](#component-app)
+
+- [Back-end](#back-end)
 - [Instalação e Configuração das bibliotecas](#-instalação-e-configuração-das-bibliotecas)
   - [Configuração de scripts de desenvolvimento](#configuração-de-scripts-de-desenvolvimento)
   - [Configurações do Knex](#configurações-do-knex)
@@ -126,53 +142,10 @@ Nosso container vai ocupar 90% da tela com máximo de até 700px:
 }
 ```
 
-## React Router DOM
-Precisamos criar um sistema de navegação entre as páginas. No HTML utilizamos os endereços das páginas, mas no React precisamos utilizar o sistema de Rotas. Para isso vamos usar o React-Router-DOM que vai criar o sistema que navega entre os componentes como se fossem páginas baseados nas rotas que o usuário está acessando.
-
-Vamos criar um arquivo 'routes.tsx' que conterá as rotas da nossa aplicação:
-
-```tsx
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-
-import Landing from './pages/Landing';
-import TeacherForm from './pages/TeacherForm';
-import TeacherList from './pages/TeacherList';
-
-function Routes() {
-    return (
-        <BrowserRouter>
-            <Route path="/" exact component={Landing} />
-            <Route path="/study" component={TeacherList} />
-            <Route path="/give-classes" component={TeacherForm} />
-        </BrowserRouter>
-    );
-}
-
-export default Routes;
-```
-
-## Component: App
-Teremos um componente principal que colocaremos no nosso 'index.tsx' que conterá todos os outros componentes da aplicação. Nas primeiras linhas vamos fazer a importação do React, do arquivo de rotas e do nosso estilo global. Vamos criar um arquivo 'App.tsx' com o componente App como uma função que retorna as nossas rotas.
-
-```tsx
-import React from 'react';
-import Routes from './routes';
-import './assets/styles/global.css';
-
-function App() {
-  return (
-    <Routes/>
-  );
-}
-
-export default App;
-```
-
-# Components
+## Components
 Vamos criar 2 components que vão se repetir em várias páginas da aplicação: PageHeader e TeacherItem.
 
-## Component: Page Header
+### Component: Page Header
 Tirando a Home, as duas outros páginas da aplicação temos um header que contém título e logo. Podemos então criar esse header em forma de component para reutilizarmos nessas páginas. Vamos criar uma pasta 'components' e uma subpasta 'PageHeader' com um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```tsx
@@ -215,7 +188,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
 export default PageHeader;
 ```
 
-## Component: Teacher Item
+### Component: Teacher Item
 Na página de listagem, temos alguns "cards" com as informações de cada professor. Também criaremos um component para esse card, tendo em vista que é um objeto que vai se repetir.
 Dentro de 'components', criar uma subpasta 'TeacherItem' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
@@ -260,10 +233,10 @@ export default TeacherItem;
 ```
 
 
-# Páginas
+## Páginas
 Nossa aplicação tem 3 páginas: Home, Listagem de Professores e Formulário. Todas as páginas serão feitas em formato de component, e navegaremos entre elas pelas rotas.
 
-## Página: Landing Page
+### Página: Landing Page
 Na pasta 'scr' criar uma pasta 'pages' e uma subpasta 'Landing' com um arquivo 'index.tsx', para criar nossa primeira página como componente "Landing" que conterá o conteúdo principal da nossa Homepage. O componente do React é uma função (com letra maiúscula) que retorna um html. Vamos começar importando o React e depois o component 'Link' padrão do React. O Link vai fazer nosso component carregar na página quando ele for chamado pela rota.
 
 ```tsx
@@ -406,7 +379,7 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
     
 ```
 
-## Página: Teacher List
+### Página: Teacher List
 Vamos criar agora a página de listagem de professores. Dentro da pasta 'pages', criar uma subpasta 'TeacherList' e um arquivo 'index.tsx'. Fazemos a importação do React e também dos nossos componentes que criamos o PageHeader e o TeacherItem. No PageHeader vamos escrever nosso título como propriedade e dentro dele criaremos o formulário de filtro que será específico dessa página. Dentro do <main> colocamos o component TeacherItem como lista. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```jsx
@@ -455,7 +428,7 @@ function TeacherList() {
 export default TeacherList;
 ```
 
-# Página: Teacher Form
+### Página: Teacher Form
 
 ```tsx
 import React from 'react';
@@ -473,10 +446,52 @@ export default TeacherForm;
 ```
 
 
+## React Router DOM
+Precisamos criar um sistema de navegação entre as páginas. No HTML utilizamos os endereços das páginas, mas no React precisamos utilizar o sistema de Rotas. Para isso vamos usar o React-Router-DOM que vai criar o sistema que navega entre os componentes como se fossem páginas baseados nas rotas que o usuário está acessando.
+
+Vamos criar um arquivo 'routes.tsx' que conterá as rotas da nossa aplicação:
+
+```tsx
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Landing from './pages/Landing';
+import TeacherForm from './pages/TeacherForm';
+import TeacherList from './pages/TeacherList';
+
+function Routes() {
+    return (
+        <BrowserRouter>
+            <Route path="/" exact component={Landing} />
+            <Route path="/study" component={TeacherList} />
+            <Route path="/give-classes" component={TeacherForm} />
+        </BrowserRouter>
+    );
+}
+
+export default Routes;
+```
+
+## Component: App
+Teremos um componente principal que colocaremos no nosso 'index.tsx' que conterá todos os outros componentes da aplicação. Nas primeiras linhas vamos fazer a importação do React, do arquivo de rotas e do nosso estilo global. Vamos criar um arquivo 'App.tsx' com o componente App como uma função que retorna as nossas rotas.
+
+```tsx
+import React from 'react';
+import Routes from './routes';
+import './assets/styles/global.css';
+
+function App() {
+  return (
+    <Routes/>
+  );
+}
+
+export default App;
+```
 
 # Back-end
-O Node e o Yarn já devem estar instalados. 
-Criar uma pasta 'server' que vai conter nossa aplicação.
+Vamos iniciar a construção da API back-end da nossa aplicação, para isso o Node e o Yarn já devem estar instalados. 
+Criar uma pasta 'server' para escrever todo o back-end.
 
 
 ## 📚 Instalação e Configuração das bibliotecas
