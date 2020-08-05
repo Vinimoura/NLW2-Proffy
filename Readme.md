@@ -123,10 +123,10 @@ Para nossa aplicação vammos criar 4 tabelas principais:
 
 ## Criação das Tabelas 
 
-Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados. Importante criar cada arquivo de tabela numa ordem numérica crescente.
+Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados. Cada tabela ficará em um arquivo separadp dentro das migration, e importante criar cada arquivo numa ordem numérica crescente.
 
 ### Tabela de Usuários
-Vamos criar a primeira tabela de cadastro de usuários. Na subpasta 'migrations' criar um arquivo '00_create_users.ts'. Seguindo a lógica das migrations, primeiro temos a função pra criar a tabela (up) e depois a função para deletar a tabela (down). Dentro da função up(), escrevemos cada coluna e sua característica (chave primária, obrigatoriedade, etc):
+Criar um arquivo '00_create_users.ts'. Seguindo a lógica das migrations, primeiro temos a função pra criar a tabela (up) e depois a função para deletar a tabela (down). Dentro da função up(), escrevemos cada coluna e sua característica (chave primária, obrigatoriedade, etc):
 
 ```ts
 import Knex from 'knex';
