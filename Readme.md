@@ -234,8 +234,64 @@ export async function down(knex: Knex) {
 }
 ```
 
-## Criando as rotas
+## Função para lidar com os Horários
+O banco SQL não consegue armazenar informações com  o formato de horas (ex: 8:00). Para resolver isso, vamos criar uma pasta 'utils' e um arquivo chamado 'convertHoursToMinutes.ts'. Nesse arquivo criaremos uma função que converte horas em minutos, assim conseguimos armazenar essa informação no banco de dados. Atráves da função de js 'split()' vamos dividir a hora onde tem os dois pontos (8:00) e retornar ela num array. Com o map vou passar por todos os itens e armazenar cada posição em uma variável, fazendo uma desestruturação de hour (para a primeira posição) e minutes (para segunda posição). Logo em seguida faço a conversão e armazeno o resultado na variável 'timeInMinutes'. Vamos utilizar essa função mais pra frente, quando  formos de fato fazer as querys para inserção das informações no banco de dados.
 
+```ts
+export default function convertHourToMinutes(time: string) {
+  const [hour, minutes] = time.split(':').map(Number);
+
+  // faço a conversão de  hora em minutos
+  const timeInMinutes = (hour * 60) + minutes;
+
+  // retorno
+  return timeInMinutes;
+}
+```
+
+## Criando as rotas
+Nossa aplicação gira em torno de duas entidades: classes e connections. Para cada entidade, vamos fazer rotas para buscar (get) ou criar (post) alguma informação no banco de dados. Na pasta 'src' vamos criar uma pasta 'controllers' que conterá um arquivo para cada entidade.
+
+### Criar e Listar as Aulas
+Vamos criar o arquivo 'ClassesController.ts'. Nas primeiras linhas vamos importar o express, o banco de dados e nossa função criada 'convertHourToMinutes()'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Na pasta 'src' vamos criar um arquivo 'routes.ts' que conterá a chamada das nossas rotas. Nas primeiras linhas, vamos fazer a importação do 'express' e também de duas classes que criaremos emm seguida, que conterá os métodos que lidam com nosso banco de dados.
+
+```ts
+import express from 'express';
+import ClassesControlller from './controllers/ClassesController';
+import ConnectionsController from './controllers/ConnectionsController';
+
+const routes = express.Router();
+const classesControllers = new ClassesControlller();
+const connectionsController = new ConnectionsController();
+
+routes.get('/classes', classesControllers.index);
+routes.post('/classes', classesControllers.create);
+
+routes.get('/connections', connectionsController.index);
+routes.post('/connections', connectionsController.create);
+
+export default routes;
+```
 
 
 
