@@ -92,8 +92,8 @@ html, body, #root{
 }
 ```
 
-Na div #root, vamos usar o flex-box com o display: flex. Ele transforma em flex container e todos os seus filhos diretos em flex itens.
-Com o 'align-items: center', todo o conteúdo fica alinhado horizontalmente e com o 'justify-content: center' todo conteúdo fica justificado ao centro da tela:
+Na div #root, vamos usar o flex-box com o `display: flex`. Ele transforma em flex container e todos os seus filhos diretos em flex itens.
+Com o `align-items: center`, todo o conteúdo fica alinhado horizontalmente e com o `justify-content: center` todo conteúdo fica justificado ao centro da tela:
 ```css
 #root{
   display: flex; 
@@ -217,9 +217,9 @@ Da mesma forma, faremos com os botões que também serão um container para os �
 
 Vamos agora fazer um break-point de 1100px que é onde mais ou menos a tela vai se converter em tamanho de desktop. Agora vamos usar o estilo display: grid, onde podemos simplesmente indicar aonde cada elemento se posicionará, seguindo a estrutura de linhas e colunas.
 
-- Com o 'grid-template-rows', setamos 2 linhas: A primeira linha vai ocupar a altura de 350px e a segunda vai ocupar o espaço que sobrar
-- Com o 'grid-template-columns',  setamos 3 colunas, onde a primeira ocupa 2 espaços e as outras duas ocupam 1 espaço cada.
-- Com o 'grid-template-areas', eu crio 'variáveis' que vão indicar cada elemento
+- Com o `grid-template-rows`, setamos 2 linhas: A primeira linha vai ocupar a altura de 350px e a segunda vai ocupar o espaço que sobrar
+- Com o `grid-template-columns`,  setamos 3 colunas, onde a primeira ocupa 2 espaços e as outras duas ocupam 1 espaço cada.
+- Com o `grid-template-areas`, eu crio 'variáveis' que vão indicar cada elemento
 
 ```css
 @media (min-width: 1100px) {
@@ -235,7 +235,7 @@ Vamos agora fazer um break-point de 1100px que é onde mais ou menos a tela vai 
     ;
   }
 ```
-Agora para cada estilo de elemento, eu informo a qual variável ele corresponde, com o estilo 'grid-area'. Ou seja, vou definir os estilos do logo, hero, buttons e total.
+Agora para cada estilo de elemento, eu informo a qual variável ele corresponde, com o estilo `grid-area`. Ou seja, vou definir os estilos do logo, hero, buttons e total.
 
 ```css
     .logo-container {
