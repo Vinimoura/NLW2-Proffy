@@ -254,7 +254,7 @@ Logo abaixo faço a conversão e armazeno o resultado na variável 'timeInMinute
 ## Criando as Querys
 Nossa aplicação gira em torno de duas entidades: classes e connections. Para cada entidade, vamos fazer rotas para buscar (get) ou criar (post) alguma informação no banco de dados. Na pasta 'src' vamos criar uma pasta 'controllers' que conterá um arquivo para cada entidade.
 
-### Criar e Listar as Aulas 
+### Listar as Aulas 
 Vamos criar o arquivo 'ClassesController.ts'. Nas primeiras linhas vamos importar o express, o banco de dados e nossa função criada 'convertHourToMinutes()'.
 
 ```ts
@@ -270,7 +270,6 @@ interface scheduleItem {
   to: string
 }
 ```
-
 Agora vamos criar uma class chamada ClassesController{}, e escrever dentro dessas chaves duas querys de listagem e criação de aulas: A primeira será a função index() que lista as aulas. Essa listagem terá 3 filtros: dia da semana, matéria e horário.
 
 Primeiro pegamos os filtros pelo request.query e setamos as tipagens deles.
@@ -321,7 +320,8 @@ Agora vamos para a query de busca na tabela 'classes'. Com umas funções do kne
   } 
 ```
 
-Abaixo temos a função create() que cria a aula. Ela vai pegar todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
+### Criar as Aulas 
+Logo abaixo a criação da listagem das aulas, continuamos escrevendo, agora a função create() que cria a aula. Ela vai pegar todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
 
 ```ts
   async create(request: Request, response: Response) {
@@ -420,15 +420,10 @@ Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.
 ```
 
 
+🚧 Continuar aqui...🚧
 
 
-
-
-
-
-
-
-
+## Rotas
 
 Na pasta 'src' vamos criar um arquivo 'routes.ts' que conterá a chamada das nossas rotas. Nas primeiras linhas, vamos fazer a importação do 'express' e também de duas classes que criaremos emm seguida, que conterá os métodos que lidam com nosso banco de dados.
 
