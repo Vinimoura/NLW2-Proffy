@@ -70,9 +70,9 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 # Executar esse projeto no seu computador
 * Clonar Repositório: `git clone https://github.com/dxwebster/NLW2-Proffy.git`
 
-Ir para a pasta web para rodar o 'front', ou ir para pasta 'server' para rodar o back
-* Instalar dependências: `yarn install or npm install`
-* Rodar Aplicação: `yarn start or npm run start`
+Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rodar o back-end:
+* Instalar dependências: `yarn install`
+* Rodar Aplicação: `yarn start`
 
 # Como criar esse projeto do zero
 Esse tutorial está divido em front-end e back-end. Basta seguir passo a passo para criar esse mesmo projeto no seu computador.
