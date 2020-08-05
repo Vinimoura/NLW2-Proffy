@@ -287,7 +287,7 @@ export default class ConnectionsController {
     }
 
 
-// Agora vamos converter o horário enviado em minutos usando nossa função convertHourToMinutes() armazenar num variável.
+// Converte o horário enviado em minutos usando nossa função convertHourToMinutes() armazenar num variável.
     const timeInMinutes = convertHourToMinutes(time); 
 
 
@@ -324,13 +324,13 @@ export default class ConnectionsController {
     } = request.body;
 
  
-// Precisamos agora usar uma função chamada 'transaction()' que prepara as inserções no banco.
+// Com a função 'transaction()' as inserções serão feitas de uma só vez.
 // A inserção só é feita caso não dê erro em nenhuma delas.
     const trx = await db.transaction();
  
  
 // Agora vamos usar o 'try' para fazer a tentativa de inserção no banco de dados.
-// Dentro dele colocamos nossas querys, que vai pegar determinados dados e inserir em suas respectivas tabelas.
+// Colocamos as querys, que armazena os dados em suas respectivas tabelas.
     try {
       
       // Prepara a query de inserção na tabela 'users'
@@ -354,7 +354,7 @@ export default class ConnectionsController {
 
 
 // A preparação da inserção do schedule vai ser um pouco diferente.
-// Como o schedule é um array de vários dados, antes de inserir precisamos fazer algumas configurações.
+// Como o schedule é um array de vários dados, antes de inserir precisamos fazer configurações.
 // Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.  
       const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
         return {
@@ -370,8 +370,7 @@ export default class ConnectionsController {
       await trx('class_schedule').insert(classSchedule)
 
 
-      // Como estamos usando o transaction, todas as querys estão apenas esperando o commit para realmente rodarem.
-      // Com todas as inserções preparadas, podemos fazer o commit() que faz as inserções nas tabelas.
+      // Com todas as querys preparadas, o commit() faz as inserções nas tabelas.
       await trx.commit();
 
 
