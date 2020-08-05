@@ -3,23 +3,24 @@
 </p>
 
 # 📑 Índice
-- [Sobre o Projeto](#-sobre-o-projeto)
+
+# [Sobre o Projeto](#-sobre-o-projeto)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 
-- [Front-end](#front-end)
-- [Instalação e Configuração das Bibliotecas Front-End](#-instalação-e-configuração-das-bibliotecas-front-end)
-- [Limpar estrutura do Template](#limpar-estrutura-do-template)
-- [Estilos Globais](#estilos-globais)
-- [Components](#components)
-  - [Component: Page Header](#component-page-header)
-  - [Component: Teacher Item](#component-teacher-item)
-- [Páginas](#páginas)
-  - [Página: Landing Page](#página-landing-page)
-  - [Página: Teacher List](#página-teacher-list)
-  - [Página: Teacher Form](#página-teacher-form)
-- [React Router DOM](#react-router-dom)
-- [Component: App](#component-app)
+# [Front-end](#front-end)
+  ## [Instalação e Configuração das Bibliotecas Front-End](#-instalação-e-configuração-das-bibliotecas-front-end)
+  ## [Limpar estrutura do Template](#limpar-estrutura-do-template)
+  ## [Estilos Globais](#estilos-globais)
+  ## [Components](#components)
+  ### [Component: Page Header](#component-page-header)
+  ### [Component: Teacher Item](#component-teacher-item)
+  - [Páginas](#páginas)
+    - [Página: Landing Page](#página-landing-page)
+    - [Página: Teacher List](#página-teacher-list)
+    - [Página: Teacher Form](#página-teacher-form)
+  - [React Router DOM](#react-router-dom)
+  - [Component: App](#component-app)
 
 - [Back-end](#back-end)
 - [Instalação e Configuração das bibliotecas](#-instalação-e-configuração-das-bibliotecas)
