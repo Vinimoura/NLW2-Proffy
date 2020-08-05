@@ -7,6 +7,8 @@
 ### [Sobre o Projeto](#-sobre-o-projeto)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
+- [Executar esse projeto no seu computador](#Executar-esse-projeto-no-seu-computador)
+- [Como criar esse projeto do zero](#Como-criar-esse-projeto-do-zero)
 
 ### [Front-end](#front-end)
 - [Instalação e Configuração das Bibliotecas Front-End](#-instalação-e-configuração-das-bibliotecas-front-end)
@@ -64,6 +66,16 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 |<img src="./readme/preview-mobile.png" width=300 />|<img src="./readme/Home-mobile.png" width=300 /> |  
 |---|---|
 
+
+# Executar esse projeto no seu computador
+* Clonar Repositório: `git clone https://github.com/dxwebster/NLW2-Proffy.git`
+
+Ir para a pasta web para rodar o 'front', ou ir para pasta 'server' para rodar o back
+* Instalar dependências: `yarn install or npm install`
+* Rodar Aplicação: `yarn start or npm run start`
+
+# Como criar esse projeto do zero
+Esse tutorial está divido em front-end e back-end. Basta seguir passo a passo para criar esse mesmo projeto no seu computador.
 
 # Front-end
 Vamos criar uma pasta 'web' que vai conter nossa aplicação. 
