@@ -8,7 +8,7 @@
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 
-### Front-end(#front-end)
+### [Front-end](#front-end)
 - [Instalação e Configuração das Bibliotecas Front-End](#-instalação-e-configuração-das-bibliotecas-front-end)
 - [Limpar estrutura do Template](#limpar-estrutura-do-template)
 - [Estilos Globais](#estilos-globais)
