@@ -66,8 +66,11 @@ Criar uma pasta 'server' que vai conter nossa aplicação.
 
 **Instalar o knex e o sqlite:** `yarn add knex sqlite3`
 
-Criar uma nova pasta 'src'e um arquivo 'server.ts' dentro dessa pasta.
+**Instalar o CORS:** `yarn add cors`
 
+**Instalar a definição de tipos do CORS:** `yarn add @types/cors`
+
+Criar uma nova pasta 'src'e um arquivo 'server.ts' dentro dessa pasta.
 
 ## Configuração de scripts de desenvolvimento
 No arquivo 'package.json', vamos configurar o script para rodar o servidor pelo TS-Node-Dev e também já vamos aproveitar para criar um script de criação de migrations pelo Knex. 
