@@ -6,6 +6,21 @@
 - [Sobre o Projeto](#-sobre-o-projeto)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
+- [Instalação-e-Configuração-das-bibliotecas](#-Instalação-e-Configuração-das-bibliotecas)
+  - [Configuração de scripts de desenvolvimento](#-Configuração de scripts de desenvolvimento)
+  - [Configurações do Knex](#-Configurações do Knex)
+  - [Configurações do Sqlite](#-Configurações do Sqlite)
+- [Criação das Tabelas](#-Criação das Tabelas)
+  - [Tabela de Usuários](#-Tabela de Usuários)
+  - [Tabela de Aulas](#-Tabela de Aulas)
+  - [Tabela de Agendamento das Aulas](#-Tabela de Agendamento das Aulas)
+  - [Tabela de Conexões](#-Tabela de Conexões)
+- [Função para lidar com os Horários](#-Função para lidar com os Horários)
+- [Controllers](#-Controllers)
+	- [Controller de Aulas](#-Controller de Aulas)
+	- [Controller de Conexões](#-Controller de Conexões)
+- [Rotas(#-Rotas)
+
 - [Licença](#-licença)
 
 ## 💡 Sobre o Projeto
@@ -32,16 +47,6 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 |<img src="./readme/preview-mobile.png" width=300 />|<img src="./readme/Home-mobile.png" width=300 /> |  
 |---|---|
 
-## Funcionalidades do Back-end
-
-### Conexões
-- Rota para listar o total de conexões realizadas
-- Rota para criar uma nova conexão
-
-### Aulas
-- Rota para criar uma aula
-- Rota para listar aulas
-  - Filtrar por matéria, dia da semana e horário
 
 # 📚 Instalação e Configuração das bibliotecas
 O Node e o Yarn já devem estar instalados. 
@@ -111,8 +116,7 @@ module.exports = {
 ## Configurações do Sqlite
 Vamos usar a extensão 'SQLite' do VScode. Clicar com o botão direito  em cima do arquivo 'database.sqlite' e selecionar 'Open Database'. Vai abrir uma aba SQLITE EXPLORER para visualizarmos as tabelas que vamos criar para a aplicação.
 
-
-# ✏ Vamos codar!
+# Criação das Tabelas 
 Com as configurações principais feitas, vamos começar nossa aplicação pela criação das tabelas do banco de dados. Vamos criar 4 tabelas:
 
 - Tabela de usuários (id, name, avatar, whatsapp, bio)
@@ -120,11 +124,9 @@ Com as configurações principais feitas, vamos começar nossa aplicação pela 
 - Tabela da agenda (week_day, from, to, class_id)
 - Tabela de conexões (id, user_id, created_at)
 
-## Criação das Tabelas 
-
 Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados. Cada tabela ficará em um arquivo separadp dentro das migration, e importante criar cada arquivo numa ordem numérica crescente.
 
-### Tabela de Usuários
+## Tabela de Usuários
 Criar um arquivo '00_create_users.ts'. Seguindo a lógica das migrations, primeiro temos a função pra criar a tabela (up) e depois a função para deletar a tabela (down). Dentro da função up(), escrevemos cada coluna e sua característica (chave primária, obrigatoriedade, etc):
 
 ```ts
@@ -145,7 +147,7 @@ export async function down(knex: Knex) {
 }
 ```
 
-### Tabela de Aulas
+## Tabela de Aulas
 Criar um arquivo '01_create_classes.ts', para armazenar as aulas. Nessa tabela teremos uma coluna que faz relacionamento com a tabela 'users'. No campo user_id, vamos armazenar qual user será professor, ou seja, vamos associar um usuário à matéria que ele vai dar aula. E aproveitando, vamos também colocar mais duas informações para os seguintes casos:
 
 - o que acontece com o professor se o id for alterado na tabela?
@@ -177,7 +179,7 @@ export async function down(knex: Knex) {
 }
 ```
 
-### Tabela de Agendamento das Aulas
+## Tabela de Agendamento das Aulas
 Criar um arquivo '02_create_classes_schedules.ts', para armazenar as datas agendadas das aulas. Precisaremos fazer um relacionamento com a tabela 'classes', então teremos o campo 'class_id' como chave estrangeira para relacionar uma aula a um agendamento.
 
 ```ts
@@ -205,7 +207,7 @@ export async function down(knex: Knex) {
 }
 ```
 
-### Tabela de Conexões
+## Tabela de Conexões
 Criar um arquivo '03_create_connections.ts'. Aqui vamos armazenar dados caso um usuário apenas tente uma conexão com um professor. Teremos apenas dois campos, o id do professor (chave estrangeira) que o user tentou a conexão e a hora que isso ocorreu. 
 
 ```ts
@@ -234,7 +236,7 @@ export async function down(knex: Knex) {
 }
 ```
 
-## Função para lidar com os Horários
+# Função para lidar com os Horários
 O banco SQL não consegue armazenar informações com  o formato de horas (ex: 8:00). Para resolver isso, vamos criar uma pasta 'utils' e um arquivo chamado 'convertHoursToMinutes.ts'. Nesse arquivo criaremos uma função que converte horas em minutos, assim conseguimos armazenar essa informação no banco de dados. Vamos utilizar essa função mais pra frente, quando  formos de fato fazer as querys para inserção das informações no banco de dados.
 
 Atráves da função de js 'split()' vamos dividir a hora onde tem os dois pontos (8:00) e retornar ela num array. Com o map vou passar por todos os itens e armazenar cada posição em uma variável, fazendo uma desestruturação de hour (para a primeira posição) e minutes (para segunda posição). Logo abaixo faço a conversão e armazeno o resultado na variável 'timeInMinutes'.
@@ -247,12 +249,22 @@ export default function convertHourToMinutes(time: string) {
 }
 ```
 
-## Controllers
-Nossa aplicação gira em torno de duas entidades: classes e connections. Para cada entidade, vamos fazer rotas para buscar (get) ou criar (post) alguma informação no banco de dados. Na pasta 'src' vamos criar uma pasta 'controllers' que conterá um arquivo para cada entidade.
+# Controllers
+Nossa aplicação gira em torno de duas entidades: aulas (classes) e conexões (connections). Para cada entidade, vamos fazer rotas para buscar (get) ou criar (post) alguma informação no banco de dados. 
+
+- Conexões
+  - Rota para listar o total de conexões realizadas
+  - Rota para criar uma nova conexão
+
+- Aulas
+  - Rota para criar uma aula
+  - Rota para listar aulas (Filtrar por matéria, dia da semana e horário)
+  
+Na pasta 'src' vamos criar uma pasta 'controllers' e dois arquivos 'ClassesController.ts' e 'ConnectionController.ts'
 
 
-### Controller de Aulas
-Vamos criar o arquivo 'ClassesController.ts'. Nas primeiras linhas vamos importar o express, o banco de dados e nossa função criada 'convertHourToMinutes()'.
+## Controller de Aulas
+No arquivo 'ClassesController.ts', nas primeiras linhas vamos importar o express, o banco de dados e nossa função criada 'convertHourToMinutes()'.
 
 ```ts
 import { Request, Response } from 'express';
@@ -385,7 +397,7 @@ export default class ConnectionsController {
 
 ```
 
-### Controller de Conexões
+## Controller de Conexões
 Vamos criar o arquivo 'ConnectionsController.ts'. Nas primeiras linhas vamos importar o express e o banco de dados. Depois vamos escrever duas funções, uma pra listar e outra para criar.
 
 ```ts
@@ -416,7 +428,7 @@ export default class ConnectionsController {
 }
 ```
 
-## Rotas
+# Rotas
 Na pasta 'src' vamos criar um arquivo 'routes.ts' que conterá a chamada das nossas rotas. Nas primeiras linhas, vamos fazer a importação do 'express' e também das duas classes que criamos, com nossos querys.
 
 ```ts
