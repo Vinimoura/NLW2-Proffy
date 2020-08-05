@@ -65,9 +65,9 @@ Criar uma pasta 'server' que vai conter nossa aplicação.
 Criar uma nova pasta 'src'e um arquivo 'server.ts' dentro dessa pasta.
 
 
-## Configuração do TS-Node-DEV
-
-Na fase de desenvolvimento utilizaremos o TS-Node-Dev, uma solução mais rápida que possui muitas funcionalidades que o TSC. O TS-Node-Dev vai compilar nossos arquivos .ts (mesma função do TSC) e também reiniciar o projeto quando o arquivo é modificado (mesma função de um Nodemom por exemplo). No arquivo 'package.json', vamos configurar o script para rodar o servidor pelo TS-Node-Dev e também já vamos aproveitar para criar um script de criação de migrations pelo Knex. 
+## Configuração de scripts de desenvolvimento
+No arquivo 'package.json', vamos configurar o script para rodar o servidor pelo TS-Node-Dev e também já vamos aproveitar para criar um script de criação de migrations pelo Knex. 
+O TS-Node-Dev vai compilar nossos arquivos .ts (mesma função do TSC) e também reiniciar o projeto quando o arquivo é modificado (mesma função de um Nodemom por exemplo). 
 
 <img src="https://ik.imagekit.io/dxwebster/Screenshot_2_UJfmFC1Zf.png" />
 
@@ -75,7 +75,6 @@ A partir de agora, para iniciar o servidor, basta executar `yarn dev:server`
 E quando formos criar nossas migrations, utilizaremos o comando `knex:migrate`
 
 ## Configurações do Knex
-
 Na pasta src, criar uma pasta 'database' e um arquivo 'connection.ts'. Esse arquivo será responsável pela nossa conexão com o banco de dados. Vamos criar uma função que do Knex que procura na pasta 'database' um arquivo chamado 'database.sqlite' para fazer a conexão com o banco de dados.
 
 ```ts
@@ -109,21 +108,24 @@ module.exports = {
 }
 ```
 
+## Configurações do Sqlite
+Vamos usar a extensão 'SQLite' do VScode. Clicar com o botão direito  em cima do arquivo 'database.sqlite' e selecionar 'Open Database'. Vai abrir uma aba SQLITE EXPLORER para visualizarmos as tabelas que vamos criar para a aplicação.
+
+
 # ✏ Primeiros códigos
 
 Para nossa aplicação vammos criar 4 tabelas principais:
 
-- Cadastro de usuários
-- Cadastro de matérias
-- Criação de Cronograma
-- Criação de conexões
+- Cadastro de usuários (id, name, avatar, whatsapp, bio)
+- Cadastro de aulas (id, subject, cost, user_id)
+- Cadastro da agenda (week_day, from, to, class_id)
+- Criação de conexões (id, user_id, created_at)
 
 ## Criação das Tabelas 
 
 Na mesma pasta 'database' vamos criar uma subpasta 'migrations'. As migrations vão servir como um histórico do banco de dados. Importante criar cada arquivo de tabela numa ordem numérica crescente.
 
-### Tabela: Create Users
-
+### Tabela de Usuários
 Vamos criar a primeira tabela de cadastro de usuários. Na subpasta 'migrations' criar um arquivo '00_create_users.ts'. Seguindo a lógica das migrations, primeiro temos a função pra criar a tabela (up) e depois a função para deletar a tabela (down). Dentro da função up(), escrevemos cada coluna e sua característica (chave primária, obrigatoriedade, etc):
 
 ```ts
@@ -144,8 +146,13 @@ export async function down(knex: Knex) {
 }
 ```
 
-### Tabela: Create Classes
-Criar um arquivo '01_create_classes.ts':
+### Tabela de Aulas
+Criar um arquivo '01_create_classes.ts', para armazenar as aulas. Nessa tabela teremos uma coluna que faz relacionamento com a tabela 'users'. No campo user_id, vamos armazenar qual user será professor, ou seja, vamos associar um usuário à matéria que ele vai dar aula. E aproveitando, vamos também colocar mais duas informações para os seguintes casos:
+
+- o que acontece com o professor se o id for alterado na tabela?
+- o que acontece com as aulas desse professor caso ele seja deletado da plataforma?
+
+Para resolver isso, vamos usar o método CASCADE. Ou seja, caso o id for alterado, será feita a alteração em todos os lugares que essa informação estiver. E caso o professor for deletado, todas as aulas associadas a ele também serem deletadas.
 
 ```ts
 import Knex from 'knex';
@@ -155,6 +162,8 @@ export async function up(knex: Knex) {
     table.increments('id').primary();
     table.string('subject').notNullable();
     table.decimal('cost').notNullable();
+
+    // Chave Estrangeira que permite relacionamento com a tabela 'users'
     table.integer('user_id')
       .notNullable()
       .references('id')
@@ -169,8 +178,8 @@ export async function down(knex: Knex) {
 }
 ```
 
-### Tabela: Create Class Schedule
-Criar um arquivo '02_create_classes_schedules.ts':
+### Tabela de Agendamento das Aulas
+Criar um arquivo '02_create_classes_schedules.ts', para armazenar as datas agendadas das aulas. Precisaremos fazer um relacionamento com a tabela 'classes', então teremos o campo 'class_id' como chave estrangeira para relacionar uma aula a um agendamento.
 
 ```ts
 import Knex from 'knex';
@@ -181,6 +190,8 @@ export async function up(knex: Knex) {
     table.integer('week_day').notNullable();
     table.integer('from').notNullable();
     table.integer('to').notNullable();
+    
+    // Chave Estrangeira que permite relacionamento com a tabela 'classes'
     table.integer('class_id')
       .notNullable()
       .references('id')
@@ -195,8 +206,8 @@ export async function down(knex: Knex) {
 }
 ```
 
-### Tabela: Create Connections
-Criar um arquivo '03_create_connections.ts':
+### Tabela de Conexões
+Criar um arquivo '03_create_connections.ts'. Aqui vamos armazenar dados caso um usuário apenas tente uma conexão com um professor. Teremos apenas dois campos, o id do professor (chave estrangeira) que o user tentou a conexão e a hora que isso ocorreu. 
 
 ```ts
 import Knex from 'knex';
@@ -204,12 +215,15 @@ import Knex from 'knex';
 export async function up(knex: Knex) {
   return knex.schema.createTable('connections', (table) => {
     table.increments('id').primary();
+    
+    // Chave Estrangeira que permite relacionamento com a tabela 'users'
     table.integer('user_id')
       .notNullable()
       .references('id')
       .inTable('users')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
+    
     table.timestamp('created_at')
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
       .notNullable();
