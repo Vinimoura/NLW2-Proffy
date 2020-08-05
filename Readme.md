@@ -78,8 +78,8 @@ O TS-Node-Dev vai compilar nossos arquivos .ts (mesma função do TSC) e também
 
 <img src="https://ik.imagekit.io/dxwebster/Screenshot_2_UJfmFC1Zf.png" />
 
-A partir de agora, para iniciar o servidor, basta executar `yarn dev:server`
-E quando formos criar nossas migrations, utilizaremos o comando `knex:migrate`
+- A partir de agora, para iniciar o servidor, basta executar `yarn dev:server`.
+- E quando formos criar nossas migrations, utilizaremos o comando `knex:migrate`
 
 ## Configurações do Knex
 Na pasta src, criar uma pasta 'database' e um arquivo 'connection.ts'. Esse arquivo será responsável pela nossa conexão com o banco de dados. Vamos criar uma função que do Knex que procura na pasta 'database' um arquivo chamado 'database.sqlite' para fazer a conexão com o banco de dados.
