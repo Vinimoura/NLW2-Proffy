@@ -10,6 +10,7 @@
   - [Configuração de scripts de desenvolvimento](#configuração-de-scripts-de-desenvolvimento)
   - [Configurações do Knex](#configurações-do-knex)
   - [Configurações do Sqlite](#configurações-do-sqlite)
+- [Server](#server)
 - [Criação das Tabelas](#criação-das-rabelas)
   - [Tabela de Usuários](#tabela-de-usuários)
   - [Tabela de Aulas](#tabela-de-Aulas)
@@ -117,6 +118,24 @@ module.exports = {
 
 ## Configurações do Sqlite
 Vamos usar a extensão 'SQLite' do VScode. Clicar com o botão direito  em cima do arquivo 'database.sqlite' e selecionar 'Open Database'. Vai abrir uma aba SQLITE EXPLORER para visualizarmos as tabelas que vamos criar para a aplicação.
+
+# Server
+O server será o arquivo principal da nossa aplicação. Já configuramos um script para rodar ele no terminal. Vamos começar importando o express, o cors e as rotas. Depois usaremos a função use() para indicar que usaremos formato json, o cors e as nossas rotas. Pelo método listen(), vamos adicionar a porta que nossa aplicação vai rodar, e uma mensagem para aparecer no terminal quando executarmos o servidor.
+
+```ts
+import express from 'express';
+import cors from 'cors';
+import routes from './routes';
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(routes);
+
+app.listen('3333', () => {
+  console.log('> Servidor rodando em http://localhost:3333');
+});
+```
 
 # Criação das Tabelas 
 Com as configurações principais feitas, vamos começar nossa aplicação pela criação das tabelas do banco de dados. Vamos criar 4 tabelas:
