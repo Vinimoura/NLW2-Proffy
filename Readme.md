@@ -72,67 +72,51 @@ Vamos fazer algumas alterações em arquivos do template que não vamos utilizar
 A construção do layout da nossa aplicação seguirá o conceito de Mobile First, ou seja, primeiro estilizaremos o layout para dispositivos mobile e depois trabalharemos nas media-querys para ajusta-los as outras telas maiores.
 
 Dentro da pasta 'assets' vamos criar uma subpasta 'styles' e dentro dela um arquivo 'global.css'. Nesse arquivo teremos estilizações globais que funcionaram para todo o projeto.
-Vamos usar unidades de medidas do css que são adaptáveis a diferentes telas, para termos um layout responsivo (ex: rem, vh e vw).
+Vamos usar unidades de medidas do css que são adaptáveis a diferentes telas, para termos um layout responsivo (ex: rem, vh e vw). Para acessar o estilo completo, clicar [aqui]().
+Vamos comentar alguns pontos importantes:
 
+
+Com o border-box, o width e height incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin.
 ```css
-:root {
-    --color-background: #F0F0F7;
-    --color-primary-lighter: #9871F5;
-    --color-primary-light: #916BEA;
-    --color-primary: #8257E5;
-    --color-primary-dark: #774DD6;
-    --color-primary-darker: #6842C2;
-    --color-secundary: #04D361;
-    --color-secundary-dark: #04BF58;
-    --color-title-in-primary: #FFFFFF;
-    --color-text-in-primary: #D4C2FF;
-    --color-text-title: #32264D;
-    --color-text-complement: #9C98A6;
-    --color-text-base: #6A6180;
-    --color-line-in-white: #E6E6F0;
-    --color-input-background: #F8F8FC;
-    --color-button-text: #FFFFFF;
-    --color-box-base: #FFFFFF;
-    --color-box-footer: #FAFAFC;
-  
-    font-size: 60%;
-  }
-
   *{
       margin: 0;
       padding: 0;
-      box-sizing: border-box; // width e height incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin.
+      box-sizing: border-box; 
   }
+```
 
+Nas nossas divs html, body e root vamos setar a altura de 100vh para que a página ocupe a altura total da tela
+```css
   html, body, #root{
-      height: 100vh; // nossa página ocupa a altura total da tela
+      height: 100vh;
   }
+```
 
-  body{
-      background: var(--color-background);
-  }
-
+Na div #root, vamos usar o flex-box com o display: flex. Ele transforma em flex container e todos os seus filhos diretos em flex itens.
+Com o 'align-items: center', todo o conteúdo fica alinhado horizontalmente e com o 'justify-content: center' todo conteúdo fica justificado ao centro da tela
+```css
   #root{
-      display: flex; // Transforma em flex container e todos os seus filhos diretos em flex itens.
-      align-items: center; // todo conteúdo fica alinhado horizontalmente 
-      justify-content: center; // todo conteúdo fica justificado ao centro da tela
+      display: flex; 
+      align-items: center;
+      justify-content: center;
   }
+```
 
+Vamos setar as fontes para que aumente em 60% o tamanho da fonte principal, para isso vamos colocar 1.6rem.
+
+```css
   body, input, button, textarea{
-      font: 500 1.6rem Poppins; // precisa forçar a fonte nos campos de formulário
-      // 1.6rem significa que aumenta em 60% o tamanho da fonte principal
+      font: 500 1.6rem Poppins;
+      
   }
+```
+Nosso container vai ocupar 90% da tela com máximo de até 700px
 
+```css
   .container{
-      width: 90vw; // ocupa 90% da tela horizontalmente
-      max-width: 700px; // a menos que o 90% passe 700px
+      width: 90vw;
+      max-width: 700px; 
   }
-
-  @media (min-width: 700px) {
-    :root {
-        font-size: 62.5%;
-    }
-}
 ```
 
 # Component: Landing Page
