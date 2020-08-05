@@ -277,7 +277,6 @@ export default class ConnectionsController {
     const week_day = filters.week_day as string;
     const time = filters.time as string;
 
-
 // Nossa listagem só poderá ser feita caso tenha pelo menos um dos filtros.
 // Para isso vamos fazer um if para caso não existir esses filtros, retornamos um erro.
     if(!filters.week_day || !filters.subject || !filters.time) {
@@ -286,10 +285,8 @@ export default class ConnectionsController {
       })
     }
 
-
-// Converte o horário enviado em minutos usando nossa função convertHourToMinutes() armazenar num variável.
+// Converte o horário enviado em minutos usando nossa função convertHourToMinutes()
     const timeInMinutes = convertHourToMinutes(time); 
-
 
 // Agora vamos para a query de busca na tabela 'classes'.
 // Com umas funções do knex conseguimos fazer algumas comparações para buscar aquilo que foi filtrado.
@@ -309,7 +306,6 @@ export default class ConnectionsController {
     return response.json(classes);
   } 
 
-
 // -------- Função que que cria uma aula --------
 // Pega todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
   async create(request: Request, response: Response) {
@@ -323,11 +319,9 @@ export default class ConnectionsController {
       schedule,
     } = request.body;
 
- 
 // Com a função 'transaction()' as inserções serão feitas de uma só vez.
 // A inserção só é feita caso não dê erro em nenhuma delas.
-    const trx = await db.transaction();
- 
+    const trx = await db.transaction(); 
  
 // Agora vamos usar o 'try' para fazer a tentativa de inserção no banco de dados.
 // Colocamos as querys, que armazena os dados em suas respectivas tabelas.
@@ -352,7 +346,6 @@ export default class ConnectionsController {
     
       const class_id = insertedClassesIds;
 
-
 // A preparação da inserção do schedule vai ser um pouco diferente.
 // Como o schedule é um array de vários dados, antes de inserir precisamos fazer configurações.
 // Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.  
@@ -364,23 +357,19 @@ export default class ConnectionsController {
           to: convertHourToMinutes(scheduleItem.to), // utilizando a função criada
         };
       });
- 
- 
-      // Agora sim podemos inserir o objeto 'classSchedule' na tabela 'class_schedule' 
+  
+// Agora sim podemos inserir o objeto 'classSchedule' na tabela 'class_schedule' 
       await trx('class_schedule').insert(classSchedule)
 
-
-      // Com todas as querys preparadas, o commit() faz as inserções nas tabelas.
+// Com todas as querys preparadas, o commit() faz as inserções nas tabelas.
       await trx.commit();
-
-
-      // Se der certo as inserções, aparece a mensagem de confirmação   
+      
+// Se as inserções derem certo, retorna sucesso   
       return response.status(201).json({
         success: 'User create with success',
       });
 
-
-    // Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
+// Aqui fechamos o 'try' e chamamos o chatch que vai expor se deu erro.    
    } catch(e) {
   
       // desfaz qualquer alteração no banco
