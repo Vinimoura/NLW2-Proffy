@@ -71,52 +71,51 @@ Vamos fazer algumas alterações em arquivos do template que não vamos utilizar
 ## Estilos Globais
 A construção do layout da nossa aplicação seguirá o conceito de Mobile First, ou seja, primeiro estilizaremos o layout para dispositivos mobile e depois trabalharemos nas media-querys para ajusta-los as outras telas maiores.
 
-Dentro da pasta 'assets' vamos criar uma subpasta 'styles' e dentro dela um arquivo 'global.css'. Nesse arquivo teremos estilizações globais que funcionaram para todo o projeto.
+Dentro da pasta 'assets' vamos criar uma subpasta 'styles' e dentro dela um arquivo 'global.css'. Nesse arquivo teremos estilizações globais que servirão para todo o projeto.
 Vamos usar unidades de medidas do css que são adaptáveis a diferentes telas, para termos um layout responsivo (ex: rem, vh e vw). Para acessar o estilo completo, clicar [aqui]().
-Vamos comentar alguns pontos importantes:
+Abaixo, vamos comentar alguns pontos importantes:
 
 
-Com o border-box, o width e height incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin.
+Com o border-box, o width e height incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin:
 ```css
-  *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box; 
-  }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
 ```
 
-Nas nossas divs html, body e root vamos setar a altura de 100vh para que a página ocupe a altura total da tela
+Nas nossas divs html, body e root vamos setar a altura de 100vh para que a página ocupe a altura total da tela:
 ```css
-  html, body, #root{
-      height: 100vh;
-  }
+html, body, #root{
+  height: 100vh;
+}
 ```
 
 Na div #root, vamos usar o flex-box com o display: flex. Ele transforma em flex container e todos os seus filhos diretos em flex itens.
-Com o 'align-items: center', todo o conteúdo fica alinhado horizontalmente e com o 'justify-content: center' todo conteúdo fica justificado ao centro da tela
+Com o 'align-items: center', todo o conteúdo fica alinhado horizontalmente e com o 'justify-content: center' todo conteúdo fica justificado ao centro da tela:
 ```css
-  #root{
-      display: flex; 
-      align-items: center;
-      justify-content: center;
-  }
+#root{
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
 ```
 
-Vamos setar as fontes para que aumente em 60% o tamanho da fonte principal, para isso vamos colocar 1.6rem.
+Vamos setar as fontes para que aumente em 60% o tamanho da fonte principal, para isso vamos colocar 1.6rem:
 
 ```css
-  body, input, button, textarea{
-      font: 500 1.6rem Poppins;
-      
-  }
+body, input, button, textarea{
+  font: 500 1.6rem Poppins;   
+}
 ```
-Nosso container vai ocupar 90% da tela com máximo de até 700px
+Nosso container vai ocupar 90% da tela com máximo de até 700px:
 
 ```css
-  .container{
-      width: 90vw;
-      max-width: 700px; 
-  }
+.container{
+  width: 90vw;
+  max-width: 700px; 
+}
 ```
 
 # Component: Landing Page
@@ -189,9 +188,9 @@ Temos um container para os botões que também setaremos como flex:
 
 ```css
 .buttons-container {
-    display: flex;
-    justify-content: center;
-    margin: 3.2rem 0;
+  display: flex;
+  justify-content: center;
+  margin: 3.2rem 0;
 }
 ```
 
@@ -199,20 +198,20 @@ Da mesma forma, faremos com os botões que também serão um container para os �
 
 ```css
 .buttons-container a {
-    width: 30rem;
-    height: 10.4rem;
-    border-radius: 0.8rem;
-    margin-right: 1.6rem;
-    font: 700 2.0rem Archivo;
+  width: 30rem;
+  height: 10.4rem;
+  border-radius: 0.8rem;
+  margin-right: 1.6rem;
+  font: 700 2.0rem Archivo;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    text-decoration: none;
-    color: var(--color-button-text);
+  text-decoration: none;
+  color: var(--color-button-text);
 
-    transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 ```
 
@@ -224,16 +223,17 @@ Vamos agora fazer um break-point de 1100px que é onde mais ou menos a tela vai 
 
 ```css
 @media (min-width: 1100px) {
-    #page-landing-content {
-        max-width: 1100px;
-        display: grid;
-        grid-template-rows: 350px 1fr; 
-        grid-template-columns: 2fr 1fr 1fr; 
-        grid-template-areas: 
-        "logo hero hero"
-        "buttons buttons total"
-        ;
-    }
+
+  #page-landing-content {
+    max-width: 1100px;
+    display: grid;
+    grid-template-rows: 350px 1fr; 
+    grid-template-columns: 2fr 1fr 1fr; 
+    grid-template-areas: 
+    "logo hero hero"
+    "buttons buttons total"
+    ;
+  }
 ```
 Agora para cada estilo de elemento, eu informo a qual variável ele corresponde, com o estilo 'grid-area'. Ou seja, vou definir os estilos do logo, hero, buttons e total.
 
