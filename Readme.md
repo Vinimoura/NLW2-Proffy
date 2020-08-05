@@ -71,8 +71,6 @@ Criar uma pasta 'server' que vai conter nossa aplicação.
 
 **Instalar a definição de tipos do CORS:** `yarn add @types/cors`
 
-Criar uma nova pasta 'src'e um arquivo 'server.ts' dentro dessa pasta.
-
 ## Configuração de scripts de desenvolvimento
 No arquivo 'package.json', vamos configurar o script para rodar o servidor pelo TS-Node-Dev e também já vamos aproveitar para criar um script de criação de migrations pelo Knex. 
 O TS-Node-Dev vai compilar nossos arquivos .ts (mesma função do TSC) e também reiniciar o projeto quando o arquivo é modificado (mesma função de um Nodemom, por exemplo). 
@@ -120,7 +118,7 @@ module.exports = {
 Vamos usar a extensão 'SQLite' do VScode. Clicar com o botão direito  em cima do arquivo 'database.sqlite' e selecionar 'Open Database'. Vai abrir uma aba SQLITE EXPLORER para visualizarmos as tabelas que vamos criar para a aplicação.
 
 # Server
-O server será o arquivo principal da nossa aplicação. Já configuramos um script para rodar ele no terminal. Vamos começar importando o express, o cors e as rotas. Depois usaremos a função use() para indicar que usaremos formato json, o cors e as nossas rotas. Pelo método listen(), vamos adicionar a porta que nossa aplicação vai rodar, e uma mensagem para aparecer no terminal quando executarmos o servidor.
+Para começar, vamos criar uma nova pasta 'src'e um arquivo 'server.ts' dentro dessa pasta. O server será o arquivo principal da nossa aplicação. Já configuramos um script para rodar ele no terminal. Vamos começar importando o express, o cors e as rotas. Depois usaremos a função use() para indicar que usaremos formato json, o cors e as nossas rotas. Pelo método listen(), vamos adicionar a porta que nossa aplicação vai rodar, e uma mensagem para aparecer no terminal quando executarmos o servidor.
 
 ```ts
 import express from 'express';
