@@ -50,11 +50,20 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 
 # Front-end
 
-Vamos criar uma pasta 'web' que vai conter nossa aplicação. 
+- Vamos criar uma pasta 'web' que vai conter nossa aplicação. 
+
+## 📚 Instalação e Configuração das Bibliotecas Front-End
 
 **Instalar o Template de aplicação de react em Typescript**: `yarn create react-app web --template typescript`
 
-Agora, dentro da pasta 'src' vamos criar uma pasta 'assets' e uma subpasta 'images'. Nela deixaremos as imagens da nossa página.
+**Instalar o React-Router-DOM**:`yarn add react-router-dom` 
+
+**Instalar os tipos do React-Router-DOM**:`yarn add @types/yarn add react-router-dom -D` 
+
+
+- Depois de instalar o template, todos os arquivos vamos colcoar dentro da pasta 'src'. 
+
+- Então, vamos criar uma pasta 'assets' e uma subpasta 'images'. Nela deixaremos as imagens da nossa página.
 
 ## Limpar estrutura do Template
 Vamos fazer algumas alterações em arquivos do template que não vamos utilizar, ou que vamos recriar depois. 
@@ -74,7 +83,6 @@ A construção do layout da nossa aplicação seguirá o conceito de Mobile Firs
 Dentro da pasta 'assets' vamos criar uma subpasta 'styles' e dentro dela um arquivo 'global.css'. Nesse arquivo teremos estilizações globais que servirão para todo o projeto.
 Vamos usar unidades de medidas do css que são adaptáveis a diferentes telas, para termos um layout responsivo (ex: rem, vh e vw). Para acessar o estilo completo, clicar [aqui]().
 Abaixo, vamos comentar alguns pontos importantes:
-
 
 Com o border-box, o width e height incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin:
 ```css
@@ -118,8 +126,145 @@ Nosso container vai ocupar 90% da tela com máximo de até 700px:
 }
 ```
 
-# Component: Landing Page
-Na pasta 'scr' criar uma pasta 'pages' e uma subpasta 'Landing' com um arquivo 'index.tsx', para criar nosso primeiro componente "Landing" que conterá o conteúdo principal da nossa Homepage. O componente do React é uma função (com letra maiúscula) que retorna um html. Vamos começar importando o React e depois o component 'Link' padrão do React.
+## React Router DOM
+Precisamos criar um sistema de navegação entre as páginas. No HTML utilizamos os endereços das páginas, mas no React precisamos utilizar o sistema de Rotas. Para isso vamos usar o React-Router-DOM que vai criar o sistema que navega entre os componentes como se fossem páginas baseados nas rotas que o usuário está acessando.
+
+Vamos criar um arquivo 'routes.tsx' que conterá as rotas da nossa aplicação:
+
+```tsx
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Landing from './pages/Landing';
+import TeacherForm from './pages/TeacherForm';
+import TeacherList from './pages/TeacherList';
+
+function Routes() {
+    return (
+        <BrowserRouter>
+            <Route path="/" exact component={Landing} />
+            <Route path="/study" component={TeacherList} />
+            <Route path="/give-classes" component={TeacherForm} />
+        </BrowserRouter>
+    );
+}
+
+export default Routes;
+```
+
+## Component: App
+Teremos um componente principal que colocaremos no nosso 'index.tsx' que conterá todos os outros componentes da aplicação. Nas primeiras linhas vamos fazer a importação do React, do arquivo de rotas e do nosso estilo global. Vamos criar um arquivo 'App.tsx' com o componente App como uma função que retorna as nossas rotas.
+
+```tsx
+import React from 'react';
+import Routes from './routes';
+import './assets/styles/global.css';
+
+function App() {
+  return (
+    <Routes/>
+  );
+}
+
+export default App;
+```
+
+# Components
+Vamos criar 2 components que vão se repetir em várias páginas da aplicação: PageHeader e TeacherItem.
+
+## Component: Page Header
+Tirando a Home, as duas outros páginas da aplicação temos um header que contém título e logo. Podemos então criar esse header em forma de component para reutilizarmos nessas páginas. Vamos criar uma pasta 'components' e uma subpasta 'PageHeader' com um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+
+```tsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import logoImg from '../../assets/images/logo.svg'
+import backIcon from '../../assets/images/icons/back.svg';
+import './styles.css';
+```
+Nosso Header terá a propriedade 'títle' que mudará de acordo com a página que ele for renderizado. Para trabalhar com isso, precisamos setar as tipagens dessa propriedade por meio de uma interface.
+
+```tsx
+// tipagem da propriedade do Header
+interface PageHeaderProps {
+    title: string;
+}
+```
+ Para informar que o componente terá essa interface usamos o React Functional Component (React.FC) passando a inferface como parâmetro. Agora no lugar do título escrevemos a variável `props.title` que trará o título que conterá lá na página acessada. A propriedade `props.children` é uma padrão do React e rederiza tudo que tiver sido escrito dentro do componente, onde ele for aplicado.
+
+```tsx
+const PageHeader: React.FC<PageHeaderProps> = (props) => {
+    return (
+        <header className="page-header">
+            
+            <div className="top-bar-container">
+                <Link to="/">
+                    <img src={backIcon} alt="Back" />
+                </Link>
+                <img src={logoImg} alt="Proffy" />
+            </div>
+
+            <div className="header-content">
+                <strong>{props.title}</strong>
+                {props.children} 
+            </div>
+        </header>
+    );
+}
+
+export default PageHeader;
+```
+
+## Component: Teacher Item
+Na página de listagem, temos alguns "cards" com as informações de cada professor. Também criaremos um component para esse card, tendo em vista que é um objeto que vai se repetir.
+Dentro de 'components', criar uma subpasta 'TeacherItem' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+
+```tsx
+import React from "react";
+import whatsappIcon from "../../assets/images/icons/whatsapp.svg";
+import "./styles.css";
+
+function TeacherItem() {
+  return (
+    <article className="teacher-item">
+      
+      <header>
+        <img src="https://avatars1.githubusercontent.com/u/61834475?s=460&u=70c1e1887730301017571eabf514e679135b9c08&v=4" alt="Adriana Lima" />
+        <div>
+          <strong>Adriana Lima</strong>
+          <span>Webmaster</span>
+        </div>
+      </header>
+      
+      <p>
+      Tenho alguns anos de experiência na área de web design e tenho apreciação pelo estudo de tecnologias, principalmente de sistemas para web e mobile.
+      </p>
+
+      <footer>
+        <p>
+          Preço/hora
+          <strong>$ 50,00</strong>
+        </p>
+
+        <button type="button">
+          <img src={whatsappIcon} alt="Whatsapp Icon" />
+          Contact
+        </button>
+      </footer>
+    
+    </article>
+  );
+}
+
+export default TeacherItem;
+```
+
+
+# Páginas
+Nossa aplicação tem 3 páginas: Home, Listagem de Professores e Formulário. Todas as páginas serão feitas em formato de component, e navegaremos entre elas pelas rotas.
+
+## Página: Landing Page
+Na pasta 'scr' criar uma pasta 'pages' e uma subpasta 'Landing' com um arquivo 'index.tsx', para criar nossa primeira página como componente "Landing" que conterá o conteúdo principal da nossa Homepage. O componente do React é uma função (com letra maiúscula) que retorna um html. Vamos começar importando o React e depois o component 'Link' padrão do React. O Link vai fazer nosso component carregar na página quando ele for chamado pela rota.
 
 ```tsx
 import React from 'react';
@@ -242,30 +387,17 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
         text-align: left; 
         margin: 0;
     }
-
-    .logo-container h2 {
-        text-align: initial; 
-        font-size: 3.6rem;
-    }
-
-    .logo-container img {
-        height: 100%;
-    }
-
+    
     .hero-image {
         grid-area: hero;
         justify-self: end; 
     }
-
+    
     .buttons-container {
         grid-area: buttons;
         justify-content: flex-start; 
     }
 
-    .buttons-container a {
-        font-size: 2.4rem;
-    }
-    
     .total-connections {
         grid-area: total;
         justify-self: end;
@@ -274,29 +406,70 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
     
 ```
 
+## Página: Teacher List
+Vamos criar agora a página de listagem de professores. Dentro da pasta 'pages', criar uma subpasta 'TeacherList' e um arquivo 'index.tsx'. Fazemos a importação do React e também dos nossos componentes que criamos o PageHeader e o TeacherItem. No PageHeader vamos escrever nosso título como propriedade e dentro dele criaremos o formulário de filtro que será específico dessa página. Dentro do <main> colocamos o component TeacherItem como lista. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
+```jsx
+import React from "react";
+import PageHeader from "../../components/PageHeader";
+import TeacherItem from "../../components/TeacherItem";
+import "./styles.css";
 
-
-
-
-
-
-
-# Component: App
-Teremos um componente principal que colocaremos no nosso 'index.tsx' que conterá todos os outros componentes da aplicação. Nas primeiras linhas vamos fazer a importação do React, do arquivo de rotas e do nosso estilo global. Vamos criar o componente App como uma função que retorna as rotas.
-
-```tsx
-import React from 'react';
-import Routes from './routes';
-import './assets/styles/global.css';
-
-function App() {
+function TeacherList() {
   return (
-    <Routes/>
+    <div id="page-teacher-list" className="container">
+      
+      <PageHeader title="Esses são os Proffys disponíveis">
+        
+        <form id="search-teachers">
+          <div className="input-block">
+            <label htmlFor="subject">Matéria</label>
+            <input type="text" id="subject" />
+          </div>
+
+          <div className="input-block">
+            <label htmlFor="week_day">Dia da Semana</label>
+            <input type="text" id="week_day" />
+          </div>
+
+          <div className="input-block">
+            <label htmlFor="time">Hora</label>
+            <input type="text" id="time" />
+          </div>
+        </form>
+      
+      </PageHeader>
+
+      <main>
+        <TeacherItem/>
+        <TeacherItem/>
+        <TeacherItem/>
+        <TeacherItem/>
+        <TeacherItem/>
+        <TeacherItem/>
+      </main>
+    </div>
   );
 }
 
-export default App;
+export default TeacherList;
+```
+
+# Página: Teacher Form
+
+```tsx
+import React from 'react';
+import PageHeader from '../../components/PageHeader';
+
+function TeacherForm() {
+    return (
+        <div id="page-teacher-form" className="container">
+            <PageHeader title="Que incrível que você quer dar aulas"/>
+        </div>
+    )
+}
+
+export default TeacherForm;
 ```
 
 
