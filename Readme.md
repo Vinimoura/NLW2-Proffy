@@ -8,7 +8,7 @@
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 
-### [Front-end](#front-end)
+### Front-end(#front-end)
 - [Instalação e Configuração das Bibliotecas Front-End](#-instalação-e-configuração-das-bibliotecas-front-end)
 - [Limpar estrutura do Template](#limpar-estrutura-do-template)
 - [Estilos Globais](#estilos-globais)
@@ -23,8 +23,8 @@
 - [Component: App](#component-app)
 
 ### [Back-end](#back-end)
-- [Instalação e Configuração das bibliotecas](#-instalação-e-configuração-das-bibliotecas)
-  - [Configuração de scripts de desenvolvimento](#configuração-de-scripts-de-desenvolvimento)
+- [Instalação e Configuração das Bibliotecas Back-end](#-instalação-e-configuração-das-bibliotecas-back-end)
+  - [Configuração de Scripts de Desenvolvimento](#configuração-de-scripts-de-desenvolvimento)
   - [Configurações do Knex](#configurações-do-knex)
   - [Configurações do Sqlite](#configurações-do-sqlite)
 - [Server](#server)
@@ -66,8 +66,7 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 
 
 # Front-end
-
-- Vamos criar uma pasta 'web' que vai conter nossa aplicação. 
+Vamos criar uma pasta 'web' que vai conter nossa aplicação. 
 
 ## 📚 Instalação e Configuração das Bibliotecas Front-End
 
@@ -76,7 +75,6 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 **Instalar o React-Router-DOM**:`yarn add react-router-dom` 
 
 **Instalar os tipos do React-Router-DOM**:`yarn add @types/yarn add react-router-dom -D` 
-
 
 - Depois de instalar o template, todos os arquivos vamos colcoar dentro da pasta 'src'. 
 
@@ -495,7 +493,7 @@ Vamos iniciar a construção da API back-end da nossa aplicação, para isso o N
 Criar uma pasta 'server' para escrever todo o back-end.
 
 
-## 📚 Instalação e Configuração das bibliotecas
+## 📚 Instalação e Configuração das Bibliotecas Back-end
 
 **Iniciar o node na pasta** _(cria o arquivo 'package.json')_: `yarn init -y`
 
@@ -517,7 +515,7 @@ Criar uma pasta 'server' para escrever todo o back-end.
 
 Depois de todas as dependências instaladas, vamos criar uma pasta 'src' que vai conter nossos arquivos.
 
-## Configuração de scripts de desenvolvimento
+## Configuração de Scripts de Desenvolvimento
 No arquivo 'package.json', vamos configurar o script para rodar o servidor pelo TS-Node-Dev e também já vamos aproveitar para criar um script de criação de migrations pelo Knex. 
 O TS-Node-Dev vai compilar nossos arquivos .ts (mesma função do TSC) e também reiniciar o projeto quando o arquivo é modificado (mesma função de um Nodemom, por exemplo). 
 
