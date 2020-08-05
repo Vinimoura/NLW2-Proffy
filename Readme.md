@@ -251,10 +251,9 @@ Logo abaixo faço a conversão e armazeno o resultado na variável 'timeInMinute
 }
 ```
 
-## Criando as Querys
+## Controllers
 Nossa aplicação gira em torno de duas entidades: classes e connections. Para cada entidade, vamos fazer rotas para buscar (get) ou criar (post) alguma informação no banco de dados. Na pasta 'src' vamos criar uma pasta 'controllers' que conterá um arquivo para cada entidade.
 
-### Listar as Aulas 
 Vamos criar o arquivo 'ClassesController.ts'. Nas primeiras linhas vamos importar o express, o banco de dados e nossa função criada 'convertHourToMinutes()'.
 
 ```ts
@@ -270,8 +269,10 @@ interface scheduleItem {
   to: string
 }
 ```
-Agora vamos criar uma class chamada ClassesController{}, e escrever dentro dessas chaves duas querys de listagem e criação de aulas: A primeira será a função index() que lista as aulas. Essa listagem terá 3 filtros: dia da semana, matéria e horário.
+Agora vamos criar uma class chamada ClassesController{}, e escrever dentro dessas chaves duas querys: A primeira será a função index() que lista as aulas. Essa listagem terá 3 filtros: dia da semana, matéria e horário.
 
+
+### Query para listar as aulas 
 Primeiro pegamos os filtros pelo request.query e setamos as tipagens deles.
 
 ```ts
@@ -320,7 +321,7 @@ Agora vamos para a query de busca na tabela 'classes'. Com umas funções do kne
   } 
 ```
 
-### Criar as Aulas 
+### Query para criar as aulas 
 Logo abaixo a criação da listagem das aulas, continuamos escrevendo, agora a função create() que cria a aula. Ela vai pegar todas as informações do corpo da requisição e inserir cada uma em sua própria tabela.
 
 ```ts
@@ -368,7 +369,7 @@ caso dê erro em alguma delas, nenhuma inserção é feita.
       const class_id = insertedClassesIds;
 ```      
       
- A preparação da inserção do schedule vai ser um pouco diferente. Como o schedule é um array de vários dados, antes de inserir precisamos fazer algumas configurações. Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.
+A preparação da inserção do schedule vai ser um pouco diferente. Como o schedule é um array de vários dados, antes de inserir precisamos fazer algumas configurações. Com a função map() vamos percorrer cada item do array e transformá-los em um objeto.
       
    
 ```ts    
