@@ -1,37 +1,58 @@
 import React from "react";
 import whatsappIcon from "../../assets/images/icons/whatsapp.svg";
 import "./styles.css";
+import api from "../../services/api";
 
-function TeacherItem() {
+export interface Teacher {
+  avatar: string;
+  bio: string;
+  cost: number;
+  id: number;
+  name: string;
+  subject: string;
+  whatsapp: string;
+}
+
+interface TeacherItemProps {
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+  function createNewConnection() {
+    api.post("connections", {
+      user_id: teacher.id,
+    });
+  }
+
   return (
     <article className="teacher-item">
-      
       <header>
-        <img src="https://avatars1.githubusercontent.com/u/61834475?s=460&u=70c1e1887730301017571eabf514e679135b9c08&v=4" alt="Adriana Lima" />
+        <img src={teacher.avatar} alt="Avatar" />
         <div>
-          <strong>Adriana Lima</strong>
-          <span>Webmaster</span>
+          <strong>{teacher.name}</strong>
+          <span>{teacher.subject}</span>
         </div>
       </header>
-      
-      <p>
-      Tenho alguns anos de experiência na área de web design e tenho apreciação pelo estudo de tecnologias, principalmente de sistemas para web e mobile.
-      </p>
+
+      <p>{teacher.bio}</p>
 
       <footer>
         <p>
           Preço/hora
-          <strong>$ 50,00</strong>
+          <strong>R$ {teacher.cost}</strong>
         </p>
-
-        <button type="button">
-          <img src={whatsappIcon} alt="Whatsapp Icon" />
-          Contact
-        </button>
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          onClick={createNewConnection}
+          href={`https://wa.me/${teacher.whatsapp}`}
+        >
+          <img src={whatsappIcon} alt="Whatsapp" />
+          Entrar em contato
+        </a>
       </footer>
-    
     </article>
   );
-}
+};
 
 export default TeacherItem;
