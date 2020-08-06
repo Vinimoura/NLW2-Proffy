@@ -119,11 +119,11 @@ Vamos criar 2 components que vão se repetir em várias páginas da aplicação:
 Tirando a Home, as duas outros páginas da aplicação temos um header que contém título e logo. Podemos então criar esse header em forma de component para reutilizarmos nessas páginas. Vamos criar uma pasta 'components' e uma subpasta 'PageHeader' com um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```tsx
-import React from "react";
-import { Link } from "react-router-dom";
-import logoImg from "../../assets/images/logo.svg";
-import backIcon from "../../assets/images/icons/back.svg";
-import "./styles.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import logoImg from '../../assets/images/logo.svg';
+import backIcon from '../../assets/images/icons/back.svg';
+import './styles.css';
 ```
 
 Nosso Header terá a propriedade 'title' que mudará de acordo com a página que ele for renderizado. Para trabalhar com isso, precisamos setar as tipagens dessa propriedade por meio de uma interface.
@@ -170,10 +170,10 @@ export default PageHeader;
 Na página de listagem, temos alguns "cards" com as informações de cada professor. Também criaremos um component para esse card, tendo em vista que é um objeto que vai se repetir. Dentro de 'components', criar uma subpasta 'TeacherItem' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```tsx
-import React from "react";
-import whatsappIcon from "../../assets/images/icons/whatsapp.svg";
-import "./styles.css";
-import api from "../../services/api";
+import React from 'react';
+import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import './styles.css';
+import api from '../../services/api';
 
 export interface Teacher {
   avatar: string;
@@ -191,7 +191,7 @@ interface TeacherItemProps {
 
 const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
   function createNewConnection() {
-    api.post("connections", {
+    api.post('connections', {
       user_id: teacher.id,
     });
   }
@@ -235,8 +235,8 @@ export default TeacherItem;
 Tanto na página de listagem quanto na página de formulário, temos inputs de texto, ou seja, vamos criar um component para ele. Dentro de 'components', criar uma subpasta 'Input' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```tsx
-import React, { InputHTMLAttributes } from "react";
-import "./styles.css";
+import React, { InputHTMLAttributes } from 'react';
+import './styles.css';
 ```
 
 Vamos extender a interface criada para o Input com uma interface já pronta do React, a 'InputHTMLAttributes' que permite que meu input tenha todas as propriedades padrão possíveis do HTML.
@@ -268,9 +268,9 @@ export default Input;
 Tanto na página de listagem quanto na página de formulário, temos um input select. Dentro de 'components', criar uma subpasta 'Select' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```tsx
-import React, { SelectHTMLAttributes } from "react";
+import React, { SelectHTMLAttributes } from 'react';
 
-import "./styles.css";
+import './styles.css';
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
@@ -307,9 +307,9 @@ export default Select;
 Tanto na página de formulário, temos um input Text Area. Dentro de 'components', criar uma subpasta 'Textarea' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```tsx
-import React, { TextareaHTMLAttributes } from "react";
+import React, { TextareaHTMLAttributes } from 'react';
 
-import "./styles.css";
+import './styles.css';
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
@@ -337,55 +337,76 @@ Nossa aplicação tem 3 páginas: Home, Listagem de Professores e Formulário. T
 Na pasta 'scr' criar uma pasta 'pages' e uma subpasta 'Landing' com um arquivo 'index.tsx', para criar nossa primeira página como componente "Landing" que conterá o conteúdo principal da nossa Homepage. O componente do React é uma função (com letra maiúscula) que retorna um html. Vamos começar importando o React e depois o component 'Link' padrão do React. O Link vai fazer nosso component carregar na página quando ele for chamado pela rota.
 
 ```tsx
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-// Para inserir imagens no JSX precisamos importar cada imagem em variáveis
-import logoImg from "../../assets/images/logo.svg";
-import landingImg from "../../assets/images/landing.svg";
-import studyIcon from "../../assets/images/icons/study.svg";
-import giveClassesIcon from "../../assets/images/icons/give-classes.svg";
-import purpleHeartIcon from "../../assets/images/icons/purple-heart.svg";
+import api from '../../services/api';
 
-import "./styles.css";
+import logoImg from '../../assets/images/logo.svg';
+import landingImg from '../../assets/images/landing.svg';
 
+import studyIcon from '../../assets/images/icons/study.svg';
+import giveClassesIcon from '../../assets/images/icons/give-classes.svg';
+import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
+
+import './styles.css';
+```
+
+Sempre que o front-end precisar manter uma informação, vamos usar o 'useState()'. Aqui vamos iniciar ele com valor zero.
+
+```tsx
 function Landing() {
-  return (
-    <div id="page-landing">
-      <div id="page-landing-content" className="container">
-        <div className="logo-container">
-          <img src={logoImg} alt="Proffy" />
-          <h2>Sua plataforma de estudos online.</h2>
-        </div>
+  const [totalConnections, setTotalConnections] = useState(0)
+```
 
-        <img
-          src={landingImg}
-          alt="Plataforma de estudos"
-          className="hero-image"
-        />
+O useEffect() retorna dois parâmtros, o primeiro vamos iniciar a função getConnections e o segundo indico em que momento essa função será executada. Nessa caso, queremos que a informação do total de conexões já apareça assim que carregar a página, então deixamos um array vazio.
 
-        <div className="buttons-container">
-          <Link to="/study" className="study">
-            <img src={studyIcon} alt="Study" />
-            Estudar
-          </Link>
+```tsx
+useEffect(() => {
+  async function getConnections() {
+    const { data } = await api.get('/connections')
+    setTotalConnections(data.total)
+  }
 
-          <Link to="/give-classes" className="give-classes">
-            <img src={giveClassesIcon} alt="Give classes" />
-            Dar Aulas
-          </Link>
-        </div>
+  getConnections()
+}, [])
 
-        <span className="total-connections">
-          Mais de 200 conexões
-          <img src={purpleHeartIcon} alt="Purple Heart" />
-        </span>
+return (
+  <div id="page-landing">
+    <div id="page-landing-content" className="container">
+      <div className="logo-container">
+        <img src={logoImg} alt="Proffy" />
+        <h2>Sua plataforma de estudos online.</h2>
       </div>
+
+      <img
+        src={landingImg}
+        alt="Plataforma de estudos"
+        className="hero-image"
+      />
+
+      <div className="buttons-container">
+        <Link to="/study" className="study">
+          <img src={studyIcon} alt="Estudar" />
+          Estudar
+        </Link>
+
+        <Link to="/give-classes" className="give-classes">
+          <img src={giveClassesIcon} alt="Dar aulas" />
+          Dar aulas
+        </Link>
+      </div>
+
+      <span className="total-connections">
+        Total de {totalConnections} conexões já realizadas{' '}
+        <img src={purpleHeartIcon} alt="Coração Roxo" />
+      </span>
     </div>
-  );
+  </div>
+)
 }
 
-export default Landing;
+export default Landing
 ```
 
 Agora vamos criar um estilo específico dessa página em um arquivo 'styles.css' dentro do mesmo diretório do 'index.ts'. Para acessar o estilo completo, clicar [aqui]().
@@ -484,144 +505,200 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
 Vamos criar agora a página de listagem de professores. Dentro da pasta 'pages', criar uma subpasta 'TeacherList' e um arquivo 'index.tsx'. Fazemos a importação do React e também dos nossos componentes que criamos o PageHeader e o TeacherItem. No PageHeader vamos escrever nosso título como propriedade e dentro dele criaremos o formulário de filtro que será específico dessa página. Dentro do <main> colocamos o component TeacherItem como lista. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
 
 ```jsx
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import PageHeader from "../../components/PageHeader";
-import TeacherItem, { Teacher } from "../../components/TeacherItem";
-import Input from "../../components/Input";
-import Select from "../../components/Select";
+import api from '../../services/api';
 
-import api from "../../services/api";
+import PageHeader from '../../components/PageHeader';
+import Input from '../../components/Input';
+import Textarea from '../../components/Textarea';
+import Select from '../../components/Select';
 
-import "./styles.css";
+import warningIcon from '../../assets/images/icons/warning.svg';
 
-export default function TeacherList() {
-  const [classes, setClasses] = useState([]);
-  const [subject, setSubject] = useState("");
-  const [week_day, setWeekDay] = useState("");
-  const [time, setTime] = useState("");
+import './styles.css';
 
-  useEffect(() => {
-    async function loadClasses() {
-      const response = await api.get("classes");
+export default function TeacherForm() {
+  const history = useHistory();
+```
 
-      setClasses(response.data);
+O useState() retorna traz dois retornos: o valor inicial do item e uma função que vai substituir esse valor inicial.
+
+```jsx
+const [name, setName] = useState('');
+const [avatar, setAvatar] = useState('');
+const [whatsapp, setWhatsapp] = useState('');
+const [bio, setBio] = useState('');
+
+const [subject, setSubject] = useState('');
+const [cost, setCost] = useState('');
+
+const [scheduleItems, setScheduleItems] = useState([
+  { week_day: 0, from: '', to: '' },
+]);
+```
+
+Quando clicar no botão '+ Novo horário' vai executar a função 'setScheduleItems' e vai retornar um array com todos os Itemms que já existem e adicionar o novo item.
+
+```jsx
+function addNewScheduleItem() {
+  setScheduleItems([...scheduleItems, { week_day: 0, from: '', to: '' }]);
+}
+```
+
+Vamos criar uma função que vai ser exeecutada assim que o formulário for enviado. Ela vai disparar os eventos que vão enviar nossos dados do formulário para o back=end.
+O `e.preventDefault()` previne o comportamento padrão do formulário de redirecionar a página depois do envio do formulário. O `history.push('/')` redireciona para a homepage.
+
+```jsx
+async function handleCreateClass(e: FormEvent) {
+  e.preventDefault();
+
+  await api.post('classes', {
+    name,
+    avatar,
+    whatsapp,
+    bio,
+    subject,
+    cost: Number(cost),
+    schedule: scheduleItems,
+  });
+
+  alert('Cadastro realizado com sucesso');
+  history.push('/');
+}
+```
+
+Essa função 'setScheduleItemValue' serve para passar pelo array de scheduleItems e identificar a posição, qual campo ele se refere e o valor. Para respeitar o conceito de imutabilidade, vamos criar um novo array 'updatedScheduleItems' com as alterações que faremos.
+
+```jsx
+function setScheduleItemValue(position: number, field: string, value: string) {
+  const updatedScheduleItems = scheduleItems.map((scheduleItem, index) => {
+    if (index === position) {
+      return { ...scheduleItem, [field]: value };
     }
+    return { ...scheduleItem };
+  });
 
-    loadClasses();
-  }, []);
+  setScheduleItems(updatedScheduleItems);
+}
 
-  async function searchClasses(e: FormEvent) {
-    e.preventDefault();
+return (
+  <div id="page-teacher-form" className="container">
+    <PageHeader
+      title="Que incrível que você quer dar aulas"
+      description="O primeiro passo é preencher esse formulário de inscrição"
+    />
 
-    const response = await api.get("classes", {
-      params: {
-        subject,
-        week_day,
-        time,
-      },
-    });
+    <main>
+      <form onSubmit={handleCreateClass}>
+        <fieldset>
+          <legend>Seus dados</legend>
+          <Input name="name" label="Nome completo" value={name} onChange={(e) => setName(e.target.value)} />
+          <Input name="avatar" label="Avatar" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
+          <Input name="whatsapp" label="WhatsApp" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} />
+          <Textarea name="bio" label="Biografia"  value={bio} onChange={(e) => setBio(e.target.value)} />
+        </fieldset>
 
-    setClasses(response.data);
-  }
+        <fieldset>
+          <legend>Sobre a aula</legend>
 
-  return (
-    <div id="page-teacher-list" className="container">
-      <PageHeader title="Estes são os proffys disponíveis.">
-        <form id="search-teachers" onSubmit={searchClasses}>
-          <Select
-            name="subject"
-            label="Matéria"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            options={[
-              { value: "Artes", label: "Artes" },
-              { value: "História", label: "História" },
-              { value: "Português", label: "Português" },
-              { value: "Inglês", label: "Inglês" },
-              { value: "Geografia", label: "Geografia" },
-              { value: "Matemática", label: "Matemática" },
-              { value: "Física", label: "Física" },
-              { value: "Química", label: "Química" },
-              { value: "Biologia", label: "Biologia" },
-              { value: "Filosofia", label: "Filosofia" },
+          <Select name="subject" label="Matéria" value={subject} onChange={(e) => setSubject(e.target.value)} options={[
+              { value: 'Artes', label: 'Artes' },
+              { value: 'História', label: 'História' },
+              { value: 'Português', label: 'Português' },
+              { value: 'Inglês', label: 'Inglês' },
+              { value: 'Geografia', label: 'Geografia' },
+              { value: 'Matemática', label: 'Matemática' },
+              { value: 'Física', label: 'Física' },
+              { value: 'Química', label: 'Química' },
+              { value: 'Biologia', label: 'Biologia' },
+              { value: 'Filosofia', label: 'Filosofia' },
             ]}
           />
-          <Select
-            name="week_day"
-            label="Dia da semana"
-            value={week_day}
-            onChange={(e) => setWeekDay(e.target.value)}
-            options={[
-              { value: "0", label: "Domingo" },
-              { value: "1", label: "Segunda-feira" },
-              { value: "2", label: "Terça-feira" },
-              { value: "3", label: "Quarta-feira" },
-              { value: "4", label: "Quinta-feira" },
-              { value: "5", label: "Sexta-feira" },
-              { value: "6", label: "Sábado" },
-            ]}
+          <Input name="cost" label="Custo da sua hora por aula" value={cost} onChange={(e) => setCost(e.target.value)}
           />
-          <Input
-            type="time"
-            name="time"
-            label="Hora"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-          <button type="submit">Buscar</button>
-        </form>
-      </PageHeader>
+        </fieldset>
 
-      <main>
-        {classes.map((teacher: Teacher) => (
-          <TeacherItem key={teacher.id} teacher={teacher} />
-        ))}
-      </main>
-    </div>
-  );
+        <fieldset>
+          <legend>
+            Horários disponíveis
+            <button type="button" onClick={addNewScheduleItem}> + Novo horário </button>
+          </legend>
+
+          {scheduleItems.map((scheduleItem, index) => (
+            <div key={scheduleItem.week_day} className="schedule-item">
+              <Select name="week_day" label="Dia da semana" value={scheduleItem.week_day} onChange={(e) =>  setScheduleItemValue(index, 'week_day', e.target.value) }
+                options={[
+                  { value: '0', label: 'Domingo' },
+                  { value: '1', label: 'Segunda-feira' },
+                  { value: '2', label: 'Terça-feira' },
+                  { value: '3', label: 'Quarta-feira' },
+                  { value: '4', label: 'Quinta-feira' },
+                  { value: '5', label: 'Sexta-feira' },
+                  { value: '6', label: 'Sábado' },
+                ]}
+              />
+              <Input name="from" label="Das" type="time" value={scheduleItem.from} onChange={(e) => setScheduleItemValue(index, 'from', e.target.value) } />
+              <Input name="to"  label="Até" type="time" value={scheduleItem.to} onChange={(e) => setScheduleItemValue(index, 'to', e.target.value) } />
+            </div>
+          ))}
+        </fieldset>
+
+        <footer>
+          <p>
+            <img src={warningIcon} alt="Aviso importante" />
+            Importante! <br />Preencha todos os dados
+          </p>
+          <button type="submit">Salvar cadastro</button>
+        </footer>
+
+      </form>
+    </main>
+  </div>
+);
 }
 ```
 
 ### Página: Teacher Form
 
 ```tsx
-import React, { useState, FormEvent } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
-import PageHeader from "../../components/PageHeader";
-import Input from "../../components/Input";
-import Textarea from "../../components/Textarea";
-import Select from "../../components/Select";
+import PageHeader from '../../components/PageHeader';
+import Input from '../../components/Input';
+import Textarea from '../../components/Textarea';
+import Select from '../../components/Select';
 
-import warningIcon from "../../assets/images/icons/warning.svg";
+import warningIcon from '../../assets/images/icons/warning.svg';
 
-import "./styles.css";
+import './styles.css';
 
 export default function TeacherForm() {
   const history = useHistory();
 
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [bio, setBio] = useState("");
-  const [subject, setSubject] = useState("");
-  const [cost, setCost] = useState("");
+  const [name, setName] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [bio, setBio] = useState('');
+  const [subject, setSubject] = useState('');
+  const [cost, setCost] = useState('');
 
   const [scheduleItems, setScheduleItems] = useState([
-    { week_day: 0, from: "", to: "" },
+    { week_day: 0, from: '', to: '' },
   ]);
 
   function addNewScheduleItem() {
-    setScheduleItems([...scheduleItems, { week_day: 0, from: "", to: "" }]);
+    setScheduleItems([...scheduleItems, { week_day: 0, from: '', to: '' }]);
   }
 
   async function handleCreateClass(e: FormEvent) {
     e.preventDefault();
 
-    await api.post("classes", {
+    await api.post('classes', {
       name,
       avatar,
       whatsapp,
@@ -631,8 +708,8 @@ export default function TeacherForm() {
       schedule: scheduleItems,
     });
 
-    alert("Cadastro realizado com sucesso");
-    history.push("/");
+    alert('Cadastro realizado com sucesso');
+    history.push('/');
   }
 
   function setScheduleItemValue(pos: number, field: string, value: string) {
@@ -693,16 +770,16 @@ export default function TeacherForm() {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               options={[
-                { value: "Artes", label: "Artes" },
-                { value: "História", label: "História" },
-                { value: "Português", label: "Português" },
-                { value: "Inglês", label: "Inglês" },
-                { value: "Geografia", label: "Geografia" },
-                { value: "Matemática", label: "Matemática" },
-                { value: "Física", label: "Física" },
-                { value: "Química", label: "Química" },
-                { value: "Biologia", label: "Biologia" },
-                { value: "Filosofia", label: "Filosofia" },
+                { value: 'Artes', label: 'Artes' },
+                { value: 'História', label: 'História' },
+                { value: 'Português', label: 'Português' },
+                { value: 'Inglês', label: 'Inglês' },
+                { value: 'Geografia', label: 'Geografia' },
+                { value: 'Matemática', label: 'Matemática' },
+                { value: 'Física', label: 'Física' },
+                { value: 'Química', label: 'Química' },
+                { value: 'Biologia', label: 'Biologia' },
+                { value: 'Filosofia', label: 'Filosofia' },
               ]}
             />
             <Input
@@ -728,16 +805,16 @@ export default function TeacherForm() {
                   label="Dia da semana"
                   value={scheduleItem.week_day}
                   onChange={(e) =>
-                    setScheduleItemValue(index, "week_day", e.target.value)
+                    setScheduleItemValue(index, 'week_day', e.target.value)
                   }
                   options={[
-                    { value: "0", label: "Domingo" },
-                    { value: "1", label: "Segunda-feira" },
-                    { value: "2", label: "Terça-feira" },
-                    { value: "3", label: "Quarta-feira" },
-                    { value: "4", label: "Quinta-feira" },
-                    { value: "5", label: "Sexta-feira" },
-                    { value: "6", label: "Sábado" },
+                    { value: '0', label: 'Domingo' },
+                    { value: '1', label: 'Segunda-feira' },
+                    { value: '2', label: 'Terça-feira' },
+                    { value: '3', label: 'Quarta-feira' },
+                    { value: '4', label: 'Quinta-feira' },
+                    { value: '5', label: 'Sexta-feira' },
+                    { value: '6', label: 'Sábado' },
                   ]}
                 />
                 <Input
@@ -746,7 +823,7 @@ export default function TeacherForm() {
                   type="time"
                   value={scheduleItem.from}
                   onChange={(e) =>
-                    setScheduleItemValue(index, "from", e.target.value)
+                    setScheduleItemValue(index, 'from', e.target.value)
                   }
                 />
                 <Input
@@ -755,7 +832,7 @@ export default function TeacherForm() {
                   type="time"
                   value={scheduleItem.to}
                   onChange={(e) =>
-                    setScheduleItemValue(index, "to", e.target.value)
+                    setScheduleItemValue(index, 'to', e.target.value)
                   }
                 />
               </div>
@@ -784,12 +861,12 @@ Precisamos criar um sistema de navegação entre as páginas. No HTML utilizamos
 Vamos criar um arquivo 'routes.tsx' que conterá as rotas da nossa aplicação:
 
 ```tsx
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import Landing from "./pages/Landing";
-import TeacherForm from "./pages/TeacherForm";
-import TeacherList from "./pages/TeacherList";
+import Landing from './pages/Landing';
+import TeacherForm from './pages/TeacherForm';
+import TeacherList from './pages/TeacherList';
 
 function Routes() {
   return (
@@ -809,15 +886,30 @@ export default Routes;
 Teremos um componente principal que colocaremos no nosso 'index.tsx' que conterá todos os outros componentes da aplicação. Nas primeiras linhas vamos fazer a importação do React, do arquivo de rotas e do nosso estilo global. Vamos criar um arquivo 'App.tsx' com o componente App como uma função que retorna as nossas rotas.
 
 ```tsx
-import React from "react";
-import Routes from "./routes";
-import "./assets/styles/global.css";
+import React from 'react';
+import Routes from './routes';
+import './assets/styles/global.css';
 
 function App() {
   return <Routes />;
 }
 
 export default App;
+```
+
+## Axios
+
+O Axios vai facilitar para o front consumir APIs externas, fazendo requisições para o backend. Criar uma pasta 'services' e um arquivo 'api.js'.
+Vamos criar a const api com o axios e colocar o endereço do servidor "http://localhost:3333".
+
+```js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:3333',
+});
+
+export default api;
 ```
 
 ## 📕 Licença

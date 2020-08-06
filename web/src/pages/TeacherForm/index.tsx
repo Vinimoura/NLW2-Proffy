@@ -19,6 +19,7 @@ export default function TeacherForm() {
   const [avatar, setAvatar] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [bio, setBio] = useState('');
+
   const [subject, setSubject] = useState('');
   const [cost, setCost] = useState('');
 
