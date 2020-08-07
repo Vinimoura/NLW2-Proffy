@@ -31,13 +31,13 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 
 ### Desktop
 
-| <img src="./readme/preview-web.png" width=500 /> | <img src="./readme/Formulário.png" width=500 /> |
+| <img src="./readme/preview-web.png" width=400 /> | <img src="./readme/Formulário.png" width=400 /> |
 | ------------------------------------------------ | ----------------------------------------------- |
 
 
 ### Mobile
 
-| <img src="./readme/preview-mobile.png" width=300 /> | <img src="./readme/Home-mobile.png" width=300 /> |
+| <img src="./readme/preview-mobile.png" width=200 /> | <img src="./readme/Home-mobile.png" width=200 /> |
 | --------------------------------------------------- | ------------------------------------------------ |
 
 
