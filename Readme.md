@@ -2,7 +2,7 @@
   <img src="./readme/Home.png"/>
 </p>
 
-<siv align="center">
+<div align="center">
 ## 💡 TUTORIAL: Como criar esse projeto do zero
 
 Confira os **TUTORIAIS DETALHADOS**, divididos em Front-end, Back-end e Mobile: 
@@ -10,7 +10,7 @@ Confira os **TUTORIAIS DETALHADOS**, divididos em Front-end, Back-end e Mobile:
 💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
 🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
 📱 **Acesse o Mobile [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/mobile)** |
-</siv>
+</div>
 
 
 ## 📑 Índice
