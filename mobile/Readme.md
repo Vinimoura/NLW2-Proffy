@@ -22,7 +22,7 @@
 
 # Mobile
 
-Vamos criar uma pasta 'mobile' que vai conter nossa aplicação.
+Vamos criar uma pasta 'mobile' que vai conter nossa aplicação. Para construir essa aplicação mobile, vamos utilizar o framework Expo, que possui um conjunto de ferramentas para nos ajudar dam a desenvolver aplicativos tanto em iOS quanto Android por JavaScript ou TypeScript.
 
 ## 📚 Instalação e Configuração das Bibliotecas Mobile
 
