@@ -31,33 +31,14 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 
 <table>
   <tr>
-    <td colspan="2">One</td>
-    <td colspan="2">Two</td>
+    <td colspan="2">Desktop</td>
+    <td colspan="2">Mobile</td>
   </tr>
   <tr>
     <td><img src="./readme/preview-web.png" width=300 /></td><td><img src="./readme/Formulário.png" width=300 /></td>
-    <td><img src="./readme/preview-mobile.png" width=180 /></td><td><img src="./readme/Home-mobile.png" width=300 /></td>
+    <td><img src="./readme/preview-mobile.png" width=180 /></td><td><img src="./readme/Home-mobile.png" width=180 /></td>
   </tr>
 </table>
-
-
-
-
-| First Header  | Second Header |
-| ------------- | ------------- |
-| <img src="./readme/preview-web.png" width=300 /> | <img src="./readme/preview-mobile.png" width=180 />  |
-| <img src="./readme/Formulário.png" width=300 />  | <img src="./readme/Home-mobile.png" width=180 /> |
-
-
-### Desktop
-<div align="center">
- <img src="./readme/preview-web.png" width=300 /> <img src="./readme/Formulário.png" width=300 /> 
-</div>
-
-### Mobile
-<div align="center">
-<img src="./readme/preview-mobile.png" width=180 /> <img src="./readme/Home-mobile.png" width=180 /> 
-</div>
 
 
 ## 📥 Executar esse projeto no seu computador
