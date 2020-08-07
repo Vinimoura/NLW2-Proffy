@@ -19,7 +19,7 @@ Acesse os Readmes com passo a passo, divididos em Front-end, Back-end e Mobile:
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 - [Executar esse projeto no seu computador](#Executar-esse-projeto-no-seu-computador)
-- [TUTORIAL: Como criar esse projeto do zero](#Como-criar-esse-projeto-do-zero)
+- [Licença](#-licença)
 
 ## 💡 Sobre o Projeto
 
@@ -59,7 +59,6 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 
 - Instalar dependências: `yarn install`
 - Rodar Aplicação: `yarn start`
-
 
 
 ## 📕 Licença
