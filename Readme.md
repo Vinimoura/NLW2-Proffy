@@ -3,7 +3,7 @@
   <br><br>
 </p>
 
-<h1 align="center">COMO CRIAR ESSE PROJETO DO ZERO?</h1> 
+<h1 align="center">Como criar esse projeto do zero</h1> 
 <div align="center">
 Acesse os Readmes com passo a passo, divididos em Front-end, Back-end e Mobile: 
 
