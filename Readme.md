@@ -63,5 +63,5 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 
 ## 📕 Licença
 
-Todos os arquivos incluídos aqui, incluindo este _README_, estão sob [Licença MIT](./LICENSE).
+Todos os arquivos incluídos aqui, incluindo este _README_, estão sob [Licença MIT](./LICENSE).<br>
 Criado com ❤ por [Adriana Lima](https://github.com/dxwebster)
