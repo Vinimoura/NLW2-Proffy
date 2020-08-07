@@ -56,7 +56,7 @@ Vamos fazer algumas alterações em arquivos do template que não vamos utilizar
 A construção do layout da nossa aplicação seguirá o conceito de Mobile First, ou seja, primeiro estilizaremos o layout para dispositivos mobile e depois trabalharemos nas media-querys para ajusta-los as outras telas maiores.
 
 Dentro da pasta 'assets' vamos criar uma subpasta 'styles' e dentro dela um arquivo 'global.css'. Nesse arquivo teremos estilizações globais que servirão para todo o projeto.
-Vamos usar unidades de medidas do css que são adaptáveis a diferentes telas, para termos um layout responsivo (ex: rem, vh e vw). Para acessar o estilo completo, clicar [aqui]().
+Vamos usar unidades de medidas do css que são adaptáveis a diferentes telas, para termos um layout responsivo (ex: rem, vh e vw). Para acessar o estilo completo, clicar [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/assets/styles/global.css).
 Abaixo, vamos comentar alguns pontos importantes:
 
 Com o border-box, o width e height incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin:
@@ -116,7 +116,7 @@ Vamos criar 2 components que vão se repetir em várias páginas da aplicação:
 
 ### Component: Page Header
 
-Tirando a Home, as duas outros páginas da aplicação temos um header que contém título e logo. Podemos então criar esse header em forma de component para reutilizarmos nessas páginas. Vamos criar uma pasta 'components' e uma subpasta 'PageHeader' com um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+Tirando a Home, as duas outros páginas da aplicação temos um header que contém título e logo. Podemos então criar esse header em forma de component para reutilizarmos nessas páginas. Vamos criar uma pasta 'components' e uma subpasta 'PageHeader' com um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/components/PageHeader/styles.css).
 
 ```tsx
 import React from 'react';
@@ -167,7 +167,7 @@ export default PageHeader;
 
 ### Component: Teacher Item
 
-Na página de listagem, temos alguns "cards" com as informações de cada professor. Também criaremos um component para esse card, tendo em vista que é um objeto que vai se repetir. Dentro de 'components', criar uma subpasta 'TeacherItem' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+Na página de listagem, temos alguns "cards" com as informações de cada professor. Também criaremos um component para esse card, tendo em vista que é um objeto que vai se repetir. Dentro de 'components', criar uma subpasta 'TeacherItem' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/components/TeacherItem/styles.css).
 
 ```tsx
 import React from 'react';
@@ -232,7 +232,7 @@ export default TeacherItem;
 
 ### Component: Input
 
-Tanto na página de listagem quanto na página de formulário, temos inputs de texto, ou seja, vamos criar um component para ele. Dentro de 'components', criar uma subpasta 'Input' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+Tanto na página de listagem quanto na página de formulário, temos inputs de texto, ou seja, vamos criar um component para ele. Dentro de 'components', criar uma subpasta 'Input' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/components/Input/styles.css).
 
 ```tsx
 import React, { InputHTMLAttributes } from 'react';
@@ -265,7 +265,7 @@ export default Input;
 
 ### Component: Select
 
-Tanto na página de listagem quanto na página de formulário, temos um input select. Dentro de 'components', criar uma subpasta 'Select' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+Tanto na página de listagem quanto na página de formulário, temos um input select. Dentro de 'components', criar uma subpasta 'Select' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/components/Select/styles.css).
 
 ```tsx
 import React, { SelectHTMLAttributes } from 'react';
@@ -304,7 +304,7 @@ export default Select;
 
 ### Component: Textarea
 
-Tanto na página de formulário, temos um input Text Area. Dentro de 'components', criar uma subpasta 'Textarea' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+Tanto na página de formulário, temos um input Text Area. Dentro de 'components', criar uma subpasta 'Textarea' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/components/Textarea/styles.css).
 
 ```tsx
 import React, { TextareaHTMLAttributes } from 'react';
@@ -409,7 +409,7 @@ return (
 export default Landing
 ```
 
-Agora vamos criar um estilo específico dessa página em um arquivo 'styles.css' dentro do mesmo diretório do 'index.ts'. Para acessar o estilo completo, clicar [aqui]().
+Agora vamos criar um estilo específico dessa página em um arquivo 'styles.css' dentro do mesmo diretório do 'index.ts'. Para acessar o estilo completo, clicar [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/pages/Landing/styles.css).
 Abaixo, vamos comentar alguns pontos importantes desse estilo:
 
 Ao colocar a imagem principal em 100%, fazemos com que ela não sobressaia o tamanho total da tela:
@@ -502,7 +502,7 @@ Agora para cada estilo de elemento, eu informo a qual variável ele corresponde,
 
 ### Página: Teacher List
 
-Vamos criar agora a página de listagem de professores. Dentro da pasta 'pages', criar uma subpasta 'TeacherList' e um arquivo 'index.tsx'. Fazemos a importação do React e também dos nossos componentes que criamos o PageHeader e o TeacherItem. No PageHeader vamos escrever nosso título como propriedade e dentro dele criaremos o formulário de filtro que será específico dessa página. Dentro do <main> colocamos o component TeacherItem como lista. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui]().
+Vamos criar agora a página de listagem de professores. Dentro da pasta 'pages', criar uma subpasta 'TeacherList' e um arquivo 'index.tsx'. Fazemos a importação do React e também dos nossos componentes que criamos o PageHeader e o TeacherItem. No PageHeader vamos escrever nosso título como propriedade e dentro dele criaremos o formulário de filtro que será específico dessa página. Dentro do <main> colocamos o component TeacherItem como lista. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/pages/TeacherList/styles.css).
 
 ```jsx
 import React, { useState, FormEvent } from 'react';
@@ -661,6 +661,9 @@ return (
 ```
 
 ### Página: Teacher Form
+Vamos criar agora a página para cadastro de professores. Dentro da pasta 'pages', criar uma subpasta 'TeacherForm' e um arquivo 'index.tsx'. Essa página também terá um 'styles.css' próprio que pode ser encontrado [aqui](https://github.com/dxwebster/NLW2-Proffy/blob/master/web/src/pages/TeacherForm/styles.css).
+
+🚧 Explicação dessa página está em construção, mas segue o código abaixo ... 🚧
 
 ```tsx
 import React, { useState, FormEvent } from 'react';
