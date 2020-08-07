@@ -1,6 +1,17 @@
 <p align="center">
   <img src="./readme/Home.png"/>
+  <br><br>
 </p>
+
+<h1 align="center">Como criar esse projeto do zero</h1> 
+<div align="center">
+Acesse os Readmes com passo a passo, divididos em Front-end, Back-end e Mobile:  <br><br>
+
+💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
+🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
+📱 **Acesse o Mobile [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/mobile)** |
+</div>
+
 
 ## 📑 Índice
 
@@ -8,7 +19,7 @@
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 - [Executar esse projeto no seu computador](#Executar-esse-projeto-no-seu-computador)
-- [TUTORIAL: Como criar esse projeto do zero](#Como-criar-esse-projeto-do-zero)
+- [Licença](#-licença)
 
 ## 💡 Sobre o Projeto
 
@@ -49,16 +60,8 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 - Instalar dependências: `yarn install`
 - Rodar Aplicação: `yarn start`
 
-## 💡 TUTORIAL: Como criar esse projeto do zero
-
-Confira os **TUTORIAIS DETALHADOS**, divididos em Front-end, Back-end e Mobile: 
-
-💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
-🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
-📱 **Acesse o Mobile [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/mobile)** |
-
 
 ## 📕 Licença
 
-Todos os arquivos incluídos aqui, incluindo este _ README _, estão sob [Licença MIT](./LICENSE).
-Criado por [Adriana Lima](https://github.com/dxwebster)
+Todos os arquivos incluídos aqui, incluindo este _README_, estão sob [Licença MIT](./LICENSE).<br>
+Criado com ❤ por [Adriana Lima](https://github.com/dxwebster)
