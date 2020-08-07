@@ -48,7 +48,7 @@ Com o projeto criado e aberto, vamos executar o comando `emulator -avd [nome do 
 Agora na pasta, vamos executar o `yarn start` para rodar a aplicação. Vai abrir uma janela "Expo Developer" no navegador que vai nos auxiliar com logs, debugs e outras funcionalidades. Agora, nessa janela do Expo, clicar no menu esquerdo em "Run on Android device/emulator", para a aplicação abrir automaticamente no seu AVD.
 
 <p align="center">
-  <img src="../readme/avd-expo.png" width="600"/>
+  <img src="../readme/avd-expo.png" width="800"/>
 </p>
 
 
