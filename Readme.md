@@ -54,9 +54,9 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 
 Esse tutorial está divido em Front-end, Back-end e Mobile. 
 
-## Acesse o tutorial do Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)
-## Acesse o tutorial do Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)
-## Acesse o tutorial do Mobile [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/mobile)
+💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
+🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
+📱 **Acesse o Mobile [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/mobile)** |
 
 ## 📕 Licença
 
