@@ -1,11 +1,12 @@
 <p align="center">
   <img src="./readme/Home.png"/>
+  <br><br>
 </p>
 
 <div align="center">
-## 💡 TUTORIAL: Como criar esse projeto do zero
+💡 **COMO CRIAR ESSE PROJETO DO ZERO?** 💡 
 
-Confira os **TUTORIAIS DETALHADOS**, divididos em Front-end, Back-end e Mobile: 
+Confira TUTORIAIS DETALHADOS, divididos em Front-end, Back-end e Mobile: 
 
 💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
 🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
