@@ -8,7 +8,7 @@
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 - [Executar esse projeto no seu computador](#Executar-esse-projeto-no-seu-computador)
-- [Como criar esse projeto do zero](#Como-criar-esse-projeto-do-zero)
+- [TUTORIAL: Como criar esse projeto do zero](#Como-criar-esse-projeto-do-zero)
 
 ## 💡 Sobre o Projeto
 
@@ -49,9 +49,9 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 - Instalar dependências: `yarn install`
 - Rodar Aplicação: `yarn start`
 
-## 💡 Como criar esse projeto do zero
+## 💡 TUTORIAL: Como criar esse projeto do zero
 
-Confira os tutoriais detalhados, divididos em Front-end, Back-end e Mobile: 
+Confira os **TUTORIAIS DETALHADOS**, divididos em Front-end, Back-end e Mobile: 
 
 💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
 🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
