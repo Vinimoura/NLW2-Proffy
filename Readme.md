@@ -51,7 +51,7 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 
 ## 💡 Como criar esse projeto do zero
 
-- Confira os tutoriais detalhados, divididos em Front-end, Back-end e Mobile: 
+Confira os tutoriais detalhados, divididos em Front-end, Back-end e Mobile: 
 
 💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
 🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
