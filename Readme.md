@@ -2,16 +2,15 @@
   <img src="./readme/Home.png"/>
 </p>
 
-# 📑 Índice
+## 📑 Índice
 
-### [Sobre o Projeto](#-sobre-o-projeto)
-
+- [Sobre o Projeto](#-sobre-o-projeto)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Design](#-design)
 - [Executar esse projeto no seu computador](#Executar-esse-projeto-no-seu-computador)
 - [Como criar esse projeto do zero](#Como-criar-esse-projeto-do-zero)
 
-# 💡 Sobre o Projeto
+## 💡 Sobre o Projeto
 
 Criação do Proffy, uma plataforma para conexão professores e alunos.
 
