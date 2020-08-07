@@ -4,9 +4,11 @@
 </p>
 
 <div align="center">
-💡 **COMO CRIAR ESSE PROJETO DO ZERO?** 💡 
+  💡 <h1 align="center">COMO CRIAR ESSE PROJETO DO ZERO?</h1> 💡 
+</div>
 
-Confira TUTORIAIS DETALHADOS, divididos em Front-end, Back-end e Mobile: 
+<div align="center">
+Acesse os Readmes com passo a passo, divididos em Front-end, Back-end e Mobile: 
 
 💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
 🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
