@@ -30,16 +30,16 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/)
 
 ### Desktop
-<p align="center">
+
 | <img src="./readme/preview-web.png" width=300 /> | <img src="./readme/Formulário.png" width=300 /> |
 | ------------------------------------------------ | ----------------------------------------------- |
-</p>
+
 
 ### Mobile
-<p align="center">
-| <img src="./readme/preview-mobile.png" width=100 /> | <img src="./readme/Home-mobile.png" width=100 /> |
+
+| <img src="./readme/preview-mobile.png" width=180 /> | <img src="./readme/Home-mobile.png" width=180 /> |
 | --------------------------------------------------- | ------------------------------------------------ |
-</p>
+
 
 # Executar esse projeto no seu computador
 
