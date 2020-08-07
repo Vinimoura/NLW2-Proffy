@@ -29,6 +29,20 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/)
 
+<table>
+  <tr>
+    <td colspan="2">One</td>
+    <td colspan="2">Two</td>
+  </tr>
+  <tr>
+    <td><img src="./readme/preview-web.png" width=300 /></td><td><img src="./readme/Formulário.png" width=300 /></td>
+    <td><img src="./readme/preview-mobile.png" width=180 /></td><td><img src="./readme/Home-mobile.png" width=300 /></td>
+  </tr>
+</table>
+
+
+
+
 | First Header  | Second Header |
 | ------------- | ------------- |
 | <img src="./readme/preview-web.png" width=300 /> | <img src="./readme/preview-mobile.png" width=180 />  |
