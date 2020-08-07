@@ -30,10 +30,9 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/)
 
 ### Desktop
-
-| <img src="./readme/preview-web.png" width=300 /> | <img src="./readme/Formulário.png" width=300 /> |
-| ------------------------------------------------ | ----------------------------------------------- |
-
+<div align="center">
+ <img src="./readme/preview-web.png" width=300 />  <img src="./readme/Formulário.png" width=300 /> 
+</div>
 
 ### Mobile
 
@@ -41,7 +40,7 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 | --------------------------------------------------- | ------------------------------------------------ |
 
 
-# Executar esse projeto no seu computador
+## 📥 Executar esse projeto no seu computador
 
 - Clonar Repositório: `git clone https://github.com/dxwebster/NLW2-Proffy.git`
 
@@ -50,13 +49,14 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 - Instalar dependências: `yarn install`
 - Rodar Aplicação: `yarn start`
 
-# Como criar esse projeto do zero
+## 💡 Como criar esse projeto do zero
 
-Esse tutorial está divido em Front-end, Back-end e Mobile. 
+- Confira os tutoriais detalhados, divididos em Front-end, Back-end e Mobile: 
 
 💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
 🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
 📱 **Acesse o Mobile [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/mobile)** |
+
 
 ## 📕 Licença
 
