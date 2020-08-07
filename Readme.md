@@ -31,13 +31,13 @@ Design feito por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/
 
 ### Desktop
 <div align="center">
- <img src="./readme/preview-web.png" width=300 />  <img src="./readme/Formulário.png" width=300 /> 
+ <img src="./readme/preview-web.png" width=300 /> <img src="./readme/Formulário.png" width=300 /> 
 </div>
 
 ### Mobile
-
-| <img src="./readme/preview-mobile.png" width=180 /> | <img src="./readme/Home-mobile.png" width=180 /> |
-| --------------------------------------------------- | ------------------------------------------------ |
+<div align="center">
+<img src="./readme/preview-mobile.png" width=180 /> <img src="./readme/Home-mobile.png" width=180 /> 
+</div>
 
 
 ## 📥 Executar esse projeto no seu computador
