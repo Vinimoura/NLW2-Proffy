@@ -5,7 +5,7 @@
 
 <h1 align="center">Como criar esse projeto do zero</h1> 
 <div align="center">
-Acesse os Readmes com passo a passo, divididos em Front-end, Back-end e Mobile: 
+Acesse os Readmes com passo a passo, divididos em Front-end, Back-end e Mobile:  <br><br>
 
 💻 **Acesse o Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)** | 
 🖥 **Acesse o Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)** | 
