@@ -94,3 +94,8 @@ export default styles;
 ## Component: Teacher Item
 
 # Conexão com a API
+
+## 📕 Licença
+
+Todos os arquivos incluídos aqui, incluindo este _README_, estão sob [Licença MIT](./LICENSE).<br>
+Criado com ❤ por [Adriana Lima](https://github.com/dxwebster)
