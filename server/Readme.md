@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./readme/Home.png"/>
+  <img src="../readme/Home.png"/>
 </p>
 
 # 📑 Índice
