@@ -8,15 +8,16 @@
 ### [Mobile](#mobile)
 
 - [Instalação e Configuração das Bibliotecas Mobile](#-instalação-e-configuração-das-bibliotecas-mobile)
-- [Components](#components)
-  - [Component: Page Header](#component-page-header)
-  - [Component: Teacher Item](#component-teacher-item)
+- [Executando o Emulador](#executando-o-emulador)
+- [Lidando com Images](#lidando-com-imagens)
 - [Páginas](#páginas)
   - [Página: Landing](#página-landing)
   - [Página: Teacher List](#página-teacher-list)
   - [Página: Give Classes](#página-give-classes)
   - [Página: Favorites](#página-favorites)
-- [App](#app)
+- [Components](#components)
+  - [Component: Page Header](#component-page-header)
+  - [Component: Teacher Item](#component-teacher-item)
 - [Conexão com a API](#conexão-com-a-api)
 
 
@@ -49,7 +50,7 @@ Agora na pasta, vamos executar o `yarn start` para rodar a aplicação. Vai abri
   <img src="../readme/avd-expo.png" width="800"/>
 </p>
 
-## Lidando com  Images
+## Lidando com Images
 Vamos criar uma pasta 'assets' e dentro dela uma subpasta 'images > icons' e adicionar todas as imagens .png que utilizaremos na nossa aplicação. Como estamos codando em Typescript precisamos fazer uma  configuração para que ele entenda a importação de imagens png. Na pasta 'src', vamos criar umma pasta '@types' e um arquivo 'index.d.ts'. Nesse arquivo vamos declarar é possível a importação de arquivos .png será na aplicação, por meio do código:
 
 ```ts
@@ -82,19 +83,14 @@ const styles = StyleSheet.create({
 export default styles;
   
 ``` 
-
+# 🚧 Em construção.. 🚧 
 
 ##  Página: Teacher List
 ##  Página: Give Classes
 ##  Página: Favorites
 
-
-
 # Components
 ## Component: Page Header
 ## Component: Teacher Item
-
-
-# App
 
 # Conexão com a API
