@@ -52,9 +52,11 @@ Ir para a pasta 'web' para rodar o front-end, ou ir para pasta 'server' para rod
 
 # Como criar esse projeto do zero
 
-Esse tutorial está divido em front-end e back-end. Basta seguir passo a passo para criar esse mesmo projeto no seu computador.
+Esse tutorial está divido em Front-end, Back-end e Mobile. 
 
-# 🚧 Em construção...🚧
+Acesse o tutorial do Front-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/web)
+Acesse o tutorial do Back-end [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/server)
+Acesse o tutorial do Mobile [aqui](https://github.com/dxwebster/NLW2-Proffy/tree/master/mobile)
 
 ## 📕 Licença
 
